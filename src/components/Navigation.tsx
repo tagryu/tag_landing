@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,11 +29,11 @@ export default function Navigation() {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center ml-24">
+          <div className="flex items-center ml-4 sm:ml-8 md:ml-24">
             <img
               src="/Logo_TAG.png"
               alt="TAG"
-              className="h-6 w-auto object-contain"
+              className="h-5 sm:h-6 w-auto object-contain"
             />
           </div>
 
@@ -65,12 +66,54 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden">
-            <svg className={`w-6 h-6 ${isScrolled ? 'text-[#333333]' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          <button 
+            className="md:hidden mr-4"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg className={`w-6 h-6 ${isScrolled ? 'text-[#07163D]' : 'text-[#07163D]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg">
+            <div className="px-6 py-4 space-y-4">
+              <button
+                onClick={() => {
+                  scrollToSection('service-intro');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
+              >
+                서비스 소개
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('pre-registration');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
+              >
+                사전예약
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('contact');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
+              >
+                문의하기
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

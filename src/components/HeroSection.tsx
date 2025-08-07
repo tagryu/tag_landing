@@ -28,13 +28,13 @@ export default function HeroSection() {
       
       <div className="container mx-auto px-6 py-20 text-center z-10 max-w-6xl">
         <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 leading-tight px-4 sm:px-0">
             당신의 모든 컨텐츠가 수익이 되는 태그
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-16 max-w-4xl mx-auto leading-relaxed">
-            내 게시물에 태그된 상품을 다른 사람이 구매할 땐 상품 금액의 5%를 리워드로,<br />
-            다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-10 sm:mb-16 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
+            내 게시물에 태그된 상품을 다른 사람이 구매할 땐 상품 금액의 5%를 리워드로,<br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.
           </p>
           
           {/* CTA 버튼 */}
@@ -44,7 +44,7 @@ export default function HeroSection() {
                 trackCTAClick('hero_cta_가장먼저경험하기');
                 document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="inline-flex items-center justify-center px-10 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA] rounded-full hover:shadow-lg transition-all duration-300"
+              className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA] rounded-full hover:shadow-lg transition-all duration-300"
             >
               가장 먼저 경험하기
             </button>

@@ -20,49 +20,49 @@ export default function RewardSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#F5F6FF]">
-      <div className="container mx-auto px-6 max-w-5xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#07163D] mb-6">
+    <section className="py-16 sm:py-20 bg-[#F5F6FF]">
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#07163D] mb-4 sm:mb-6">
             진짜 리워드를 드려요
           </h2>
-          <p className="text-lg text-gray-600 mb-2">
+          <p className="text-base sm:text-lg text-gray-600 mb-2">
             단순한 쇼핑을 넘어 취향으로 연결되는 경험
           </p>
-          <p className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             진짜 후기, 진짜 구매, 그리고 진짜 리워드.
           </p>
         </div>
 
-        <div className="flex items-center gap-12">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           {/* Left side - Steps */}
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-[#1a1a1a] mb-8">
+          <div className="flex-1 w-full">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#1a1a1a] mb-6 sm:mb-8 text-center lg:text-left">
               리워드 받는 법, 알려드릴게요.
             </h3>
             
-            <div className="space-y-10">
+            <div className="space-y-6 sm:space-y-10">
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`flex items-start gap-4 transition-all duration-500 ${
+                  className={`flex items-start gap-3 sm:gap-4 transition-all duration-500 ${
                     activeStep === index ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-2'
                   }`}
                 >
                   <div
-                    className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold transition-all duration-500 ${
+                    className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base transition-all duration-500 ${
                       activeStep === index ? 'bg-[#243B7A] scale-110' : 'bg-gray-300'
                     }`}
                   >
                     {step.number}
                   </div>
                   <div className="flex-1">
-                    <h4 className={`font-bold text-lg mb-1 transition-colors duration-500 ${
+                    <h4 className={`font-bold text-base sm:text-lg mb-1 transition-colors duration-500 ${
                       activeStep === index ? 'text-[#243B7A]' : 'text-[#1a1a1a]'
                     }`}>
                       {step.title}
                     </h4>
-                    <p className="text-gray-600 whitespace-pre-line">{step.description}</p>
+                    <p className="text-sm sm:text-base text-gray-600 whitespace-pre-line">{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -70,13 +70,13 @@ export default function RewardSection() {
           </div>
 
           {/* Right side - Phone mockup */}
-          <div className="flex-shrink-0">
-            <div className="relative mx-auto" style={{ width: '280px' }}>
+          <div className="flex-shrink-0 mt-8 lg:mt-0">
+            <div className="relative mx-auto" style={{ width: '240px' }}>
               {/* Light gray phone frame with rounded corners */}
-              <div className="bg-gray-200 rounded-[3rem] p-2 shadow-lg">
+              <div className="bg-gray-200 rounded-[2.5rem] p-2 shadow-lg">
                 {/* White phone screen */}
-                <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ height: '580px' }}>
-                  <div className="p-6">
+                <div className="bg-white rounded-[2rem] overflow-hidden" style={{ height: '480px' }}>
+                  <div className="p-4">
                     {/* Content will be added later */}
                   </div>
                 </div>
