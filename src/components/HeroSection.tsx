@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { trackCTAClick } from '@/components/GoogleAnalyticsEvents';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,7 +40,10 @@ export default function HeroSection() {
           {/* CTA 버튼 */}
           <div className="flex justify-center">
             <button 
-              onClick={() => document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                trackCTAClick('hero_cta_가장먼저경험하기');
+                document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="inline-flex items-center justify-center px-10 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA] rounded-full hover:shadow-lg transition-all duration-300"
             >
               가장 먼저 경험하기

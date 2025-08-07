@@ -41,7 +41,7 @@ export default function RewardSection() {
               리워드 받는 법, 알려드릴게요.
             </h3>
             
-            <div className="space-y-6">
+            <div className="space-y-10">
               {steps.map((step, index) => (
                 <div
                   key={index}

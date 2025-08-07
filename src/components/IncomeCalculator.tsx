@@ -1,6 +1,55 @@
 'use client';
 
+import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { trackEarlybirdSubmit } from '@/components/GoogleAnalyticsEvents';
+
 export default function IncomeCalculator() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    instagram: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Supabase에 데이터 저장
+      const { data, error } = await supabase
+        .from('earlybird_registrations') // 테이블 이름
+        .insert([
+          {
+            name: formData.name,
+            phone: formData.phone,
+            instagram: formData.instagram,
+            created_at: new Date().toISOString()
+          }
+        ]);
+      
+      if (error) throw error;
+      
+      // GA4 이벤트 추적
+      trackEarlybirdSubmit(formData);
+      
+      setSubmitMessage('예약이 완료되었습니다! 곧 연락드리겠습니다.');
+      setFormData({ name: '', phone: '', instagram: '' });
+      
+      setTimeout(() => {
+        setSubmitMessage('');
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Supabase Error:', error);
+      setSubmitMessage('오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="pre-registration" className="py-32 bg-white min-h-screen flex items-center">
       <div className="container mx-auto px-6 max-w-5xl">
@@ -52,12 +101,15 @@ export default function IncomeCalculator() {
                 특별한 혜택, 지금 바로 예약할까요?
               </h3>
               
-              <form className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">이름</label>
                   <input
                     type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
                     placeholder="닉네임도 괜찮아요 :)"
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C6EFF] focus:border-transparent"
                   />
                 </div>
@@ -66,16 +118,42 @@ export default function IncomeCalculator() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">연락처</label>
                   <input
                     type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     placeholder="010-0000-0000"
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C6EFF] focus:border-transparent"
                   />
                 </div>
                 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">인스타그램 계정</label>
+                  <input
+                    type="text"
+                    value={formData.instagram}
+                    onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                    placeholder="@yourinstagram"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C6EFF] focus:border-transparent"
+                  />
+                </div>
+                
+                {submitMessage && (
+                  <div className={`text-center p-3 rounded-lg ${
+                    submitMessage.includes('완료') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  }`}>
+                    {submitMessage}
+                  </div>
+                )}
+                
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all mt-4"
+                  disabled={isSubmitting}
+                  className={`w-full bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all mt-4 ${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
-                  얼리버드 예약하기
+                  {isSubmitting ? '처리 중...' : '얼리버드 예약하기'}
                 </button>
               </form>
             </div>
