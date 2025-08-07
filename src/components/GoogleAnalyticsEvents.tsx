@@ -3,7 +3,7 @@
 // GTM dataLayer push 함수
 declare global {
   interface Window {
-    dataLayer: any[];
+    dataLayer: Array<Record<string, unknown>>;
   }
 }
 

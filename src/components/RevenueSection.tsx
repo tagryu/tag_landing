@@ -21,7 +21,7 @@ export default function RevenueSection() {
               <span className="text-6xl">🤍</span>
             </div>
             <p className="text-gray-500 mb-4">
-              '좋아요, 팔로워'가 전부였던
+              &apos;좋아요, 팔로워&apos;가 전부였던
             </p>
             <h3 className="text-2xl font-bold text-[#1a1a1a]">
               기존 SNS

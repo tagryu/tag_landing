@@ -24,7 +24,7 @@ export default function TestimonialSection() {
               </div>
             </div>
             <p className="text-[#6A7282] mb-4">
-              "평소에 올리던 OOTD 사진에 TAG 하기 시작한 지 3개월 만에 월 200만원 수익이 생겼어요!"
+              &quot;평소에 올리던 OOTD 사진에 TAG 하기 시작한 지 3개월 만에 월 200만원 수익이 생겼어요!&quot;
             </p>
             <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
               <p className="text-sm text-[#6A7282]">팔로워 12K</p>
@@ -42,7 +42,7 @@ export default function TestimonialSection() {
               </div>
             </div>
             <p className="text-[#6A7282] mb-4">
-              "취미로 운영하던 패션 계정이 이제는 제 부업이 됐어요. 학비 걱정 없이 학교 다니고 있습니다."
+              &quot;취미로 운영하던 패션 계정이 이제는 제 부업이 됐어요. 학비 걱정 없이 학교 다니고 있습니다.&quot;
             </p>
             <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
               <p className="text-sm text-[#6A7282]">팔로워 8.5K</p>
@@ -60,7 +60,7 @@ export default function TestimonialSection() {
               </div>
             </div>
             <p className="text-[#6A7282] mb-4">
-              "뷰티 제품 리뷰만 해도 수익이 들어와요. 팔로워들도 신뢰할 수 있는 제품을 찾을 수 있다고 좋아해요."
+              &quot;뷰티 제품 리뷰만 해도 수익이 들어와요. 팔로워들도 신뢰할 수 있는 제품을 찾을 수 있다고 좋아해요.&quot;
             </p>
             <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
               <p className="text-sm text-[#6A7282]">팔로워 25K</p>
