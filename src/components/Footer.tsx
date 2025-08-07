@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="mb-8">
           <div className="flex justify-center mb-6">
             <img 
-              src="/TAG_Logo_White.png" 
+              src="/TAG_Logo_white.png" 
               alt="TAG" 
               className="h-10"
             />

@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TAG - 당신의 모든 콘텐츠가 수익이 되는 곳",
   description: "내 게시물에 태그된 상품을 다른 사람이 구매할 땐 5% 리워드를, 다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
