@@ -1,18 +1,18 @@
+import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
-import ValueProposition from '@/components/ValueProposition';
-import HowItWorks from '@/components/HowItWorks';
-import RevenueFlow from '@/components/RevenueFlow';
-import PreRegistration from '@/components/PreRegistration';
+import RevenueSection from '@/components/RevenueSection';
+import RewardSection from '@/components/RewardSection';
+import IncomeCalculator from '@/components/IncomeCalculator';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
+      <Navigation />
       <HeroSection />
-      <ValueProposition />
-      <HowItWorks />
-      <RevenueFlow />
-      <PreRegistration />
+      <RevenueSection />
+      <RewardSection />
+      <IncomeCalculator />
       <Footer />
     </div>
   );
