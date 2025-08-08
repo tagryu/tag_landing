@@ -8,15 +8,15 @@ export default function RewardSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 4);
-    }, 2000);
+    }, 4000); // 2초에서 4초로 변경
     return () => clearInterval(interval);
   }, []);
 
   const steps = [
-    { number: 1, title: '상품 구매', description: '마음에 드는 상품 구매' },
-    { number: 2, title: '콘텐츠 업로드', description: '구매한 상품을 태그해 콘텐츠 업로드' },
-    { number: 3, title: '타인 구매', description: '내 콘텐츠 게시물에 태그된 상품을 다른 사람이 구매' },
-    { number: 4, title: '리워드 지급', description: '구매가 발생한 상품 가격의 5%를 리워드로 지급\n(단, 1,000원 이상 출금 가능)' },
+    { number: 1, title: '상품 구매', description: '마음에 드는 상품 구매', image: '/Flow1.png' },
+    { number: 2, title: '콘텐츠 업로드', description: '구매한 상품을 태그해 콘텐츠 업로드', image: '/Flow2.png' },
+    { number: 3, title: '타인 구매', description: '내 콘텐츠 게시물에 태그된 상품을 다른 사람이 구매', image: '/Flow3.png' },
+    { number: 4, title: '리워드 지급', description: '구매가 발생한 상품 가격의 5%를 리워드로 지급\n(단, 1,000원 이상 출금 가능)', image: '/Flow4.png' },
   ];
 
   return (
@@ -75,10 +75,22 @@ export default function RewardSection() {
               {/* Light gray phone frame with rounded corners */}
               <div className="bg-gray-200 rounded-[2.5rem] p-2 shadow-lg">
                 {/* White phone screen */}
-                <div className="bg-white rounded-[2rem] overflow-hidden" style={{ height: '480px' }}>
-                  <div className="p-4">
-                    {/* Content will be added later */}
-                  </div>
+                <div className="bg-white rounded-[2rem] overflow-hidden relative" style={{ height: '480px' }}>
+                  {/* Flow images */}
+                  {steps.map((step, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ${
+                        activeStep === index ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
