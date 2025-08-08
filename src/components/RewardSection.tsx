@@ -47,6 +47,7 @@ export default function RewardSection() {
                 <div
                   key={index}
                   className={`flex items-start gap-3 sm:gap-4 transition-all duration-500 cursor-pointer ${
+                    hoveredStep === index ? 'opacity-100 translate-x-0' :
                     activeStep === index ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-2'
                   }`}
                   onMouseEnter={() => setHoveredStep(index)}
@@ -54,6 +55,7 @@ export default function RewardSection() {
                 >
                   <div
                     className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base transition-all duration-500 ${
+                      hoveredStep === index ? 'bg-[#243B7A] scale-110' : 
                       activeStep === index ? 'bg-[#243B7A] scale-110' : 'bg-gray-300'
                     }`}
                   >
@@ -61,6 +63,7 @@ export default function RewardSection() {
                   </div>
                   <div className="flex-1">
                     <h4 className={`font-bold text-base sm:text-lg mb-1 transition-colors duration-500 ${
+                      hoveredStep === index ? 'text-[#243B7A]' :
                       activeStep === index ? 'text-[#243B7A]' : 'text-[#1a1a1a]'
                     }`}>
                       {step.title}
