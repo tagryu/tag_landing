@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function RewardSection() {
   const [activeStep, setActiveStep] = useState(0);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,9 +46,11 @@ export default function RewardSection() {
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`flex items-start gap-3 sm:gap-4 transition-all duration-500 ${
+                  className={`flex items-start gap-3 sm:gap-4 transition-all duration-500 cursor-pointer ${
                     activeStep === index ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-2'
                   }`}
+                  onMouseEnter={() => setHoveredStep(index)}
+                  onMouseLeave={() => setHoveredStep(null)}
                 >
                   <div
                     className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base transition-all duration-500 ${
@@ -81,7 +84,9 @@ export default function RewardSection() {
                     <div
                       key={index}
                       className={`absolute inset-0 transition-opacity duration-1000 ${
-                        activeStep === index ? 'opacity-100' : 'opacity-0'
+                        hoveredStep !== null 
+                          ? hoveredStep === index ? 'opacity-100' : 'opacity-0'
+                          : activeStep === index ? 'opacity-100' : 'opacity-0'
                       }`}
                     >
                       <img
