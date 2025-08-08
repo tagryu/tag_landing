@@ -24,7 +24,8 @@ export default function Footer() {
           </a>
         </div>
         
-        <div className="text-xs sm:text-sm text-white/60">
+        <div className="text-xs sm:text-sm text-white/60 space-y-2">
+          <p>문의: <a href="mailto:tagryu22@gmail.com" className="text-white/80 hover:text-white transition-colors">tagryu22@gmail.com</a></p>
           <p>© 2025 TAG. All rights reserved.</p>
         </div>
       </div>
