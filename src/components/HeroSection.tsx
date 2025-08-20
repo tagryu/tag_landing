@@ -11,7 +11,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex flex-col overflow-hidden pt-20">
       {/* 배경 비디오 */}
       <div className="absolute inset-0">
         <video 
@@ -26,29 +26,36 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       </div>
       
-      <div className="container mx-auto px-6 py-20 text-center z-10 max-w-6xl">
-        <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 leading-tight px-4 sm:px-0">
-            당신의 모든 컨텐츠가 수익이 되는 태그
-          </h1>
-          
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-10 sm:mb-16 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
-            내 게시물에 태그된 상품을 다른 사람이 구매할 땐 상품 금액의 5%를 리워드로,<br className="hidden sm:block" />
-            <span className="sm:hidden"> </span>다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.
-          </p>
-          
-          {/* CTA 버튼 */}
-          <div className="flex justify-center">
-            <button 
-              onClick={() => {
-                trackCTAClick('hero_cta_가장먼저경험하기');
-                document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA] rounded-full hover:shadow-lg transition-all duration-300"
-            >
-              가장 먼저 경험하기
-            </button>
+      <div className="flex-1 flex flex-col justify-between z-10">
+        <div className="flex-1 flex items-center justify-center px-6 py-12">
+          <div className={`transform transition-all duration-1000 text-center ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-8 leading-tight">
+              돈이 되는 일상을 모두는<br className="sm:hidden" />
+              <span className="hidden sm:inline">당신의 모든 컨텐츠가 수익이 되는 </span>
+              태그로 공유
+            </h1>
+            
+            <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+              <span className="block sm:hidden">내가 언젠가 촬영한 콘텐츠를 공유</span>
+              <span className="hidden sm:block">
+                내 게시물에 태그된 상품을 다른 사람이 구매할 땐 상품 금액의 5%를 리워드로,<br />
+                다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.
+              </span>
+            </p>
           </div>
+        </div>
+        
+        {/* CTA 버튼 - 모바일에서 하단 고정 */}
+        <div className="px-6 pb-8 sm:pb-12">
+          <button 
+            onClick={() => {
+              trackCTAClick('hero_cta_가장먼저경험하기');
+              document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="w-full sm:w-auto sm:mx-auto block px-6 sm:px-10 py-4 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA] rounded-full hover:shadow-lg transition-all duration-300"
+          >
+            가장 먼저 경험하기
+          </button>
         </div>
       </div>
     </section>

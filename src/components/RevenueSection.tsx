@@ -1,48 +1,56 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 export default function RevenueSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="service-intro" className="py-16 sm:py-20 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#07163D] mb-4 sm:mb-6">
-            좋아요만으론 부족했던 당신께
+    <section 
+      ref={sectionRef}
+      className="bg-[#F5F6FF] flex items-center justify-center py-16 sm:py-20 min-h-[400px] sm:min-h-[812px]"
+    >
+      <div className="container mx-auto px-6 sm:px-6 max-w-6xl">
+        <div className="text-center">
+          <h2 
+            className={`font-bold text-[#07163D] leading-tight transition-all duration-1000 text-2xl sm:text-[42px] px-4 sm:px-0 ${
+              isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
+            }`}
+            style={{ 
+              fontFamily: 'Pretendard',
+              lineHeight: '1.3'
+            }}
+          >
+            <span className="block sm:inline">내가 태그한 상품이 팔릴 때 마다 5%를 리워드로,</span>
+            <span className="block sm:hidden"><br/></span>
+            <span className="block sm:inline">다른 사람이 태그한 상품을 살 때마다 5%를 할인 받아요.</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600">
-            이제 팔로워나 좋아요 수에 상관없이,<br />
-            누구나 콘텐츠로 수익을 만들 수 있어요.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          {/* 기존 SNS */}
-          <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-8 sm:p-10 text-center">
-            <div className="mb-6 sm:mb-8">
-              <span className="text-5xl sm:text-6xl">🤍</span>
-            </div>
-            <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">
-              &apos;좋아요, 팔로워&apos;가 전부였던
-            </p>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#1a1a1a]">
-              기존 SNS
-            </h3>
-          </div>
-
-          {/* TAG */}
-          <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-8 sm:p-10 text-center">
-            <div className="mb-6 sm:mb-8">
-              <span className="text-5xl sm:text-6xl">💰</span>
-            </div>
-            <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">
-              태그한 상품 금액의 5%씩 쌓이는
-            </p>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#1a1a1a] mb-2">
-              TAG
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-500">
-              (1,000원 이상 출금 가능)
-            </p>
-          </div>
         </div>
       </div>
     </section>

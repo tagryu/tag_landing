@@ -11,7 +11,7 @@ export default function Footer() {
             />
           </div>
           <p className="text-base sm:text-lg mb-6 sm:mb-8">
-            리뷰가 수익이 되는 새로운 소셜 커머스
+            당신의 모든 컨텐츠가 수익이 되는<br></br>새로운 소셜 커머스
           </p>
         </div>
         
@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
         
         <div className="text-xs sm:text-sm text-white/60 space-y-2">
-          <p>문의: <a href="mailto:tagryu22@gmail.com" className="text-white/80 hover:text-white transition-colors">tagryu22@gmail.com</a></p>
+          <p>문의: <a href="mailto:tag_official@tags.kr" className="text-white/80 hover:text-white transition-colors">tagryu22@gmail.com</a></p>
           <p>© 2025 TAG. All rights reserved.</p>
         </div>
       </div>
