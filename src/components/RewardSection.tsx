@@ -91,7 +91,7 @@ export default function RewardSection() {
               />
             </div>
             <p className="text-white mb-3 sm:mb-4 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
-              '좋아요, 팔로워'가 전부였던
+              &apos;좋아요, 팔로워&apos;가 전부였던
             </p>
             <h3 className="text-white font-bold text-lg sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
               기존 SNS

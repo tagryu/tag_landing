@@ -32,8 +32,7 @@ export default function OOTDSection() {
   return (
     <section 
       ref={sectionRef}
-      className="bg-[#F5F6FF] py-16 sm:py-20" 
-      style={{ minHeight: '600px', sm: { height: '1375px' } }}
+      className="bg-[#F5F6FF] py-16 sm:py-20 min-h-[600px] sm:min-h-[1375px]" 
     >
       <div className="container mx-auto px-6 sm:px-6 max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
