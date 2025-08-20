@@ -2,7 +2,9 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import RevenueSection from '@/components/RevenueSection';
 import RewardSection from '@/components/RewardSection';
-import IncomeCalculator from '@/components/IncomeCalculator';
+import OOTDSection from '@/components/OOTDSection';
+import EarlyBirdSection from '@/components/EarlyBirdSection';
+// import IncomeCalculator from '@/components/IncomeCalculator';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -12,7 +14,9 @@ export default function Home() {
       <HeroSection />
       <RevenueSection />
       <RewardSection />
-      <IncomeCalculator />
+      <OOTDSection />
+      <EarlyBirdSection />
+      {/* <IncomeCalculator /> */}
       <Footer />
     </div>
   );

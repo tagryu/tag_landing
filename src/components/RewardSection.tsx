@@ -1,107 +1,121 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function RewardSection() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 4);
-    }, 4000); // 2초에서 4초로 변경
-    return () => clearInterval(interval);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
-  const steps = [
-    { number: 1, title: '상품 구매', description: '마음에 드는 상품 구매', image: '/Flow1.png' },
-    { number: 2, title: '콘텐츠 업로드', description: '구매한 상품을 태그해 콘텐츠 업로드', image: '/Flow2.png' },
-    { number: 3, title: '타인 구매', description: '내 콘텐츠 게시물에 태그된 상품을 다른 사람이 구매', image: '/Flow3.png' },
-    { number: 4, title: '리워드 지급', description: '구매가 발생한 상품 가격의 5%를 리워드로 지급\n(단, 1,000원 이상 출금 가능)', image: '/Flow4.png' },
-  ];
-
   return (
-    <section className="py-16 sm:py-20 bg-[#F5F6FF]">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#07163D] mb-4 sm:mb-6">
-            진짜 리워드를 드려요
+    <section 
+      ref={sectionRef}
+      className="bg-white flex items-center justify-center py-16 sm:py-20" 
+      style={{ minHeight: '819px' }}
+    >
+      <div className="container mx-auto px-6 sm:px-6 max-w-6xl">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 
+            className={`font-bold text-[#07163D] mb-4 transition-all duration-1000 text-2xl sm:text-5xl px-4 sm:px-0 ${
+              isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
+            }`}
+            style={{ fontFamily: 'Pretendard', transitionDelay: '200ms' }}
+          >
+            어차피하는 SNS, 그리고 쇼핑
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 mb-2">
-            단순한 쇼핑을 넘어 취향으로 연결되는 경험
-          </p>
-          <p className="text-base sm:text-lg text-gray-600">
-            진짜 후기, 진짜 구매, 그리고 진짜 리워드.
-          </p>
+          <h2 
+            className={`font-bold text-[#07163D] mb-6 sm:mb-8 transition-all duration-1000 text-2xl sm:text-5xl px-4 sm:px-0 ${
+              isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
+            }`}
+            style={{ fontFamily: 'Pretendard', transitionDelay: '400ms' }}
+          >
+            아무런 리워드 없이 하기엔 아깝잖아요.
+          </h2>
+          <div className={`transition-all duration-1000 ${
+            isVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '600ms' }}
+          >
+            <p className="text-gray-600 mb-1 px-6 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
+              팔로워나 좋아요 수에 상관없이,
+            </p>
+            <p className="text-gray-600 px-6 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
+              누구나 수익을 만들 수 있어요.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          {/* Left side - Steps */}
-          <div className="flex-1 w-full">
-            <h3 className="text-xl sm:text-2xl font-bold text-[#1a1a1a] mb-6 sm:mb-8 text-center lg:text-left">
-              리워드 받는 법, 알려드릴게요.
-            </h3>
-            
-            <div className="space-y-6 sm:space-y-10">
-              {steps.map((step, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start gap-3 sm:gap-4 transition-all duration-500 cursor-pointer ${
-                    hoveredStep === index ? 'opacity-100 translate-x-0' :
-                    activeStep === index ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-2'
-                  }`}
-                  onMouseEnter={() => setHoveredStep(index)}
-                  onMouseLeave={() => setHoveredStep(null)}
-                >
-                  <div
-                    className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base transition-all duration-500 ${
-                      hoveredStep === index ? 'bg-[#243B7A] scale-110' : 
-                      activeStep === index ? 'bg-[#243B7A] scale-110' : 'bg-gray-300'
-                    }`}
-                  >
-                    {step.number}
-                  </div>
-                  <div className="flex-1">
-                    <h4 className={`font-bold text-base sm:text-lg mb-1 transition-colors duration-500 ${
-                      hoveredStep === index ? 'text-[#243B7A]' :
-                      activeStep === index ? 'text-[#243B7A]' : 'text-[#1a1a1a]'
-                    }`}>
-                      {step.title}
-                    </h4>
-                    <p className="text-sm sm:text-base text-gray-600 whitespace-pre-line">{step.description}</p>
-                  </div>
-                </div>
-              ))}
+        <div 
+          className={`grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto transition-all duration-1000 ${
+            isVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '800ms' }}
+        >
+          {/* 기존 SNS */}
+          <div className="bg-[#A8B5CC] rounded-3xl p-8 sm:p-12 text-center">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <img 
+                src="/Heart.png" 
+                alt="Heart" 
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              />
             </div>
+            <p className="text-white mb-3 sm:mb-4 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
+              '좋아요, 팔로워'가 전부였던
+            </p>
+            <h3 className="text-white font-bold text-lg sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
+              기존 SNS
+            </h3>
           </div>
 
-          {/* Right side - Phone mockup */}
-          <div className="flex-shrink-0 mt-8 lg:mt-0">
-            <div className="relative mx-auto" style={{ width: '240px' }}>
-              {/* Light gray phone frame with rounded corners */}
-              <div className="bg-gray-200 rounded-[2.5rem] p-2 shadow-lg">
-                {/* White phone screen */}
-                <div className="bg-white rounded-[2rem] overflow-hidden relative" style={{ height: '480px' }}>
-                  {/* Flow images */}
-                  {steps.map((step, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-opacity duration-1000 ${
-                        hoveredStep !== null 
-                          ? hoveredStep === index ? 'opacity-100' : 'opacity-0'
-                          : activeStep === index ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    >
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Picksell */}
+          <div className="bg-[#243B7A] rounded-3xl p-8 sm:p-12 text-center">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-4xl">💰</span>
             </div>
+            <p className="text-white mb-3 sm:mb-4 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
+              태그한 상품 금액의 5%씩 쌓이는
+            </p>
+            <div className="mb-2">
+              <img 
+                src="/Logo_mini.png" 
+                alt="xpicksell" 
+                className="h-5 sm:h-6 mx-auto"
+              />
+            </div>
+            <p className="text-white/80 text-sm" style={{ fontFamily: 'Pretendard' }}>
+              (1,000원 이상 출금 가능)
+            </p>
           </div>
         </div>
       </div>
