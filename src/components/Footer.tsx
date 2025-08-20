@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
         
         <div className="text-xs sm:text-sm text-white/60 space-y-2">
-          <p>문의: <a href="mailto:tag_official@tags.kr" className="text-white/80 hover:text-white transition-colors">tagryu22@gmail.com</a></p>
+          <p>문의: <a href="mailto:tag_official@tags.kr" className="text-white/80 hover:text-white transition-colors">tag_official@tags.kr</a></p>
           <p>© 2025 TAG. All rights reserved.</p>
         </div>
       </div>

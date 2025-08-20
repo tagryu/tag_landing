@@ -64,10 +64,10 @@ export default function RewardSection() {
           }`}
           style={{ transitionDelay: '600ms' }}
           >
-            <p className="text-gray-600 mb-1 px-6 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
+            <p className="text-gray-600 mb-1 px-4 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
               팔로워나 좋아요 수에 상관없이,
             </p>
-            <p className="text-gray-600 px-6 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
+            <p className="text-gray-600 px-4 sm:px-0 text-base sm:text-xl" style={{ fontFamily: 'Pretendard' }}>
               누구나 수익을 만들 수 있어요.
             </p>
           </div>

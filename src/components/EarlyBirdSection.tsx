@@ -49,14 +49,15 @@ export default function EarlyBirdSection() {
       <div className="container mx-auto px-6 sm:px-6 max-w-7xl py-16 sm:py-20">
         <div className="text-center mb-12 sm:mb-16">
           <h2 
-            className={`font-bold text-[#07163D] mb-4 transition-all duration-1000 text-5xl px-4 sm:px-0 ${
+            className={`font-bold text-[#07163D] mb-4 transition-all duration-1000 text-2xl sm:text-5xl px-4 sm:px-0 ${
               isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-10'
             }`}
             style={{ fontFamily: 'Pretendard', transitionDelay: '200ms' }}
           >
-            얼리버드를 위한 두가지 특별한 혜택
+            <span className="sm:hidden">얼리버드를 위한<br/>두가지 특별한 혜택</span>
+            <span className="hidden sm:inline">얼리버드를 위한 두가지 특별한 혜택</span>
           </h2>
           <p 
             className={`text-gray-600 transition-all duration-1000 text-base sm:text-lg px-4 sm:px-0 ${
@@ -87,11 +88,11 @@ export default function EarlyBirdSection() {
                   혜택 1
                 </div>
                 <h4 className="font-bold text-[#07163D] mb-2 text-xl sm:text-3xl px-4 sm:px-0" style={{ fontFamily: 'Pretendard' }}>
-                  더 많은 노출.
+                  지원금 3만원.
                 </h4>
                 <p className="text-gray-600 leading-relaxed px-4 sm:px-0 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
-                  <span className="sm:hidden">당신의 스타일이 더 많은 사람들에게<br/>가장 먼저 발견될 수 있도록<br/>5번의 기회를 드립니다.</span>
-                  <span className="hidden sm:inline">당신의 스타일이 더 많은 사람들에게 가장 먼저<br/>발견될 수 있도록 5번의 기회를 드립니다.</span>
+                  <span className="sm:hidden">당신의 첫 콘텐츠를 응원하며<br/>3만원의 쇼핑 지원금을 선물로 드려요.</span>
+                  <span className="hidden sm:inline">당신의 첫 콘텐츠를 응원하며<br/>3만원의 쇼핑 지원금을 선물로 드려요.</span>
                 </p>
               </div>
 
@@ -104,7 +105,7 @@ export default function EarlyBirdSection() {
                   더 높은 리워드.
                 </h4>
                 <p className="text-gray-600 leading-relaxed px-4 sm:px-0 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
-                  <span className="sm:hidden">누구보다 빨랐던 당신과<br/>2025년 내내 7%의 리워드로<br/>함께 할게요.</span>
+                  <span className="sm:hidden">누구보다 빨랐던 당신과 2025년 내내 <br/>7%의 리워드로 함께 할게요.</span>
                   <span className="hidden sm:inline">누구보다 빨랐던 당신과 2025년 내내 7%의 리워드로 함께 할게요.</span>
                 </p>
               </div>
