@@ -58,6 +58,13 @@ export default function EarlyBirdSection() {
       if (error) throw error;
       
       // Slack으로 알림 전송 (API Route 사용)
+      console.log('🚀 슬랙 알림 전송 시작...');
+      console.log('📤 전송 데이터:', {
+        name: formData.name,
+        contact: formData.contact,
+        instagram: formData.instagram
+      });
+      
       const slackResponse = await fetch('/api/slack-notification', {
         method: 'POST',
         headers: {
@@ -70,10 +77,26 @@ export default function EarlyBirdSection() {
         })
       });
       
-      const slackResult = await slackResponse.json();
+      console.log('📡 API 응답 상태:', slackResponse.status, slackResponse.ok ? '✅' : '❌');
       
-      if (slackResult.error) {
-        console.error('Slack Error:', slackResult.error);
+      const slackResult = await slackResponse.json();
+      console.log('📨 API 응답 데이터:', slackResult);
+      
+      if (slackResult.slackSent) {
+        console.log('✅ 슬랙 알림 전송 성공!');
+        console.log('   - Slack 응답 코드:', slackResult.slackStatus);
+        console.log('   - Slack 응답:', slackResult.slackResponse);
+      } else if (slackResult.warning) {
+        console.warn('⚠️ 슬랙 알림 전송 실패:', slackResult.warning);
+        if (slackResult.error) {
+          console.error('   - 에러 상세:', slackResult.error);
+        }
+      } else {
+        console.log('⏩ 슬랙 알림 건너뜀');
+      }
+      
+      if (!slackResult.success) {
+        console.error('❌ API 요청 실패:', slackResult.message);
       }
       
       // GA4 이벤트 추적
