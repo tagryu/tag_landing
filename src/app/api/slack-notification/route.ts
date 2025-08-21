@@ -11,7 +11,20 @@ export async function OPTIONS() {
 }
 
 export async function POST(request: Request) {
-  const debugInfo: any = {
+  interface DebugInfo {
+    steps: string[];
+    timestamp: string;
+    bodyReceived?: { name: string; contact: string; instagram: string };
+    webhookUrlExists?: boolean;
+    webhookUrlLength?: number;
+    slackResponseStatus?: number;
+    slackResponseStatusText?: string;
+    slackResponseBody?: string;
+    error?: string;
+    errorStack?: string;
+  }
+  
+  const debugInfo: DebugInfo = {
     steps: [],
     timestamp: new Date().toISOString()
   };
