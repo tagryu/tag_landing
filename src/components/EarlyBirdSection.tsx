@@ -58,7 +58,7 @@ export default function EarlyBirdSection() {
       if (error) throw error;
       
       // Slack으로 알림 전송 (API Route 사용)
-      await fetch('/api/slack-notification', {
+      const slackResponse = await fetch('/api/slack-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,6 +69,12 @@ export default function EarlyBirdSection() {
           instagram: formData.instagram
         })
       });
+      
+      const slackResult = await slackResponse.json();
+      
+      if (slackResult.error) {
+        console.error('Slack Error:', slackResult.error);
+      }
       
       // GA4 이벤트 추적
       trackEarlybirdSubmit({
