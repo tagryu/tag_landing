@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { trackEarlybirdSubmit } from '@/components/GoogleAnalyticsEvents';
 
 export default function EarlyBirdSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -10,6 +12,8 @@ export default function EarlyBirdSection() {
     contact: '',
     instagram: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,10 +38,45 @@ export default function EarlyBirdSection() {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 폼 제출 로직
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    
+    try {
+      // Supabase에 데이터 저장
+      const { error } = await supabase
+        .from('earlybird_registrations')
+        .insert([
+          {
+            name: formData.name,
+            phone: formData.contact,
+            instagram: formData.instagram,
+            created_at: new Date().toISOString()
+          }
+        ]);
+      
+      if (error) throw error;
+      
+      // GA4 이벤트 추적
+      trackEarlybirdSubmit({
+        name: formData.name,
+        phone: formData.contact,
+        instagram: formData.instagram
+      });
+      
+      setSubmitMessage('예약이 완료되었습니다! 곧 연락드리겠습니다.');
+      setFormData({ name: '', contact: '', instagram: '' });
+      
+      setTimeout(() => {
+        setSubmitMessage('');
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Supabase Error:', error);
+      setSubmitMessage('오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -93,7 +132,7 @@ export default function EarlyBirdSection() {
                 </h4>
                 <p className="text-gray-600 leading-relaxed px-4 sm:px-0 text-base sm:text-lg" style={{ fontFamily: 'Pretendard' }}>
                   <span className="sm:hidden">당신의 첫 콘텐츠를 응원하며<br/>3만원의 쇼핑 지원금을 선물로 드려요.</span>
-                  <span className="hidden sm:inline">당신의 첫 콘텐츠를 응원하며<br/>3만원의 쇼핑 지원금을 선물로 드려요.</span>
+                  <span className="hidden sm:inline">당신의 첫 콘텐츠를 응원하며 3만원의 쇼핑 지원금을<br/>선물로 드려요.</span>
                 </p>
               </div>
 
@@ -136,6 +175,7 @@ export default function EarlyBirdSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     placeholder="닉네임도 괜찮아요 :)"
+                    required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
                     style={{ fontFamily: 'Pretendard' }}
                   />
@@ -150,6 +190,7 @@ export default function EarlyBirdSection() {
                     value={formData.contact}
                     onChange={(e) => setFormData({...formData, contact: e.target.value})}
                     placeholder="010-0000-0000 / email@email.com"
+                    required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
                     style={{ fontFamily: 'Pretendard' }}
                   />
@@ -164,19 +205,31 @@ export default function EarlyBirdSection() {
                     value={formData.instagram}
                     onChange={(e) => setFormData({...formData, instagram: e.target.value})}
                     placeholder="@yourinstagram"
+                    required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
                     style={{ fontFamily: 'Pretendard' }}
                   />
                 </div>
 
+                {submitMessage && (
+                  <div className={`text-center p-3 rounded-lg ${
+                    submitMessage.includes('완료') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  }`}>
+                    {submitMessage}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full py-3 sm:py-4 rounded-full wave-button font-bold text-white transition-all hover:shadow-lg mt-4 sm:mt-6 text-sm sm:text-base relative"
+                  disabled={isSubmitting}
+                  className={`w-full py-3 sm:py-4 rounded-full wave-button font-bold text-white transition-all hover:shadow-lg mt-4 sm:mt-6 text-sm sm:text-base relative ${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                   style={{ 
                     fontFamily: 'Pretendard'
                   }}
                 >
-                  <span className="relative z-10">얼리버드 예약하기</span>
+                  <span className="relative z-10">{isSubmitting ? '처리 중...' : '얼리버드 예약하기'}</span>
                 </button>
               </form>
             </div>
