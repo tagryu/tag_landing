@@ -88,7 +88,7 @@ export default function OOTDSection() {
                       <img 
                         src="/phone1.jpg" 
                         alt="OOTD 게시물 1" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-bottom"
                       />
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export default function OOTDSection() {
                       <img 
                         src="/phone2.jpg" 
                         alt="OOTD 게시물 2" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-bottom"
                       />
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export default function OOTDSection() {
                       <img 
                         src="/phone3.jpg" 
                         alt="리워드 확인 1" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-bottom"
                       />
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function OOTDSection() {
                       <img 
                         src="/phone4.jpg" 
                         alt="리워드 확인 2" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-bottom"
                       />
                   </div>
                 </div>
