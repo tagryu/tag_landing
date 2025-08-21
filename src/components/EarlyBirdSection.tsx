@@ -57,6 +57,52 @@ export default function EarlyBirdSection() {
       
       if (error) throw error;
       
+      // Slack으로 알림 전송
+      const slackMessage = {
+        text: "🎉 새로운 얼리버드 예약이 접수되었습니다!",
+        blocks: [
+          {
+            type: "header",
+            text: {
+              type: "plain_text",
+              text: "🎉 새로운 얼리버드 예약"
+            }
+          },
+          {
+            type: "section",
+            fields: [
+              {
+                type: "mrkdwn",
+                text: `*이름:*\n${formData.name}`
+              },
+              {
+                type: "mrkdwn",
+                text: `*연락처:*\n${formData.contact}`
+              },
+              {
+                type: "mrkdwn",
+                text: `*인스타그램:*\n${formData.instagram}`
+              },
+              {
+                type: "mrkdwn",
+                text: `*접수 시간:*\n${new Date().toLocaleString('ko-KR')}`
+              }
+            ]
+          },
+          {
+            type: "divider"
+          }
+        ]
+      };
+
+      await fetch('https://hooks.slack.com/services/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', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(slackMessage)
+      });
+      
       // GA4 이벤트 추적
       trackEarlybirdSubmit({
         name: formData.name,
@@ -72,7 +118,7 @@ export default function EarlyBirdSection() {
       }, 5000);
       
     } catch (error) {
-      console.error('Supabase Error:', error);
+      console.error('Error:', error);
       setSubmitMessage('오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
       setIsSubmitting(false);
