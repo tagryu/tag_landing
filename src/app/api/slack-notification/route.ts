@@ -82,16 +82,19 @@ export async function POST(request: Request) {
       { headers: corsHeaders }
     );
     
-  } catch (error: any) {
-    console.error('[Slack API] CATCH ERROR:', error.message);
-    console.error('[Slack API] Error stack:', error.stack);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : '';
+    
+    console.error('[Slack API] CATCH ERROR:', errorMessage);
+    console.error('[Slack API] Error stack:', errorStack);
     
     // 에러가 발생해도 클라이언트에는 성공 응답
     return NextResponse.json(
       { 
         message: "OK",
         warning: "Slack notification failed but registration saved",
-        error: error.message 
+        error: errorMessage 
       },
       { headers: corsHeaders }
     );
