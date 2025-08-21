@@ -42,6 +42,7 @@ export default function EarlyBirdSection() {
 
   return (
     <section 
+      id="pre-registration"
       ref={sectionRef}
       className="bg-white flex items-center justify-center" 
       style={{ minHeight: '1140px' }}
@@ -170,13 +171,12 @@ export default function EarlyBirdSection() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 sm:py-4 rounded-4xl font-bold text-white transition-all hover:shadow-lg mt-4 sm:mt-6 text-sm sm:text-base"
+                  className="w-full py-3 sm:py-4 rounded-full wave-button font-bold text-white transition-all hover:shadow-lg mt-4 sm:mt-6 text-sm sm:text-base relative"
                   style={{ 
-                    fontFamily: 'Pretendard', 
-                    background: 'linear-gradient(to right, #2A50FB, #8D16FA)'
+                    fontFamily: 'Pretendard'
                   }}
                 >
-                  얼리버드 예약하기
+                  <span className="relative z-10">얼리버드 예약하기</span>
                 </button>
               </form>
             </div>

@@ -84,7 +84,7 @@ export default function OOTDSection() {
                 style={{ transitionDelay: '600ms' }}
               >
                 <div className="relative">
-                  <div className="w-[120px] h-[260px] sm:w-[195px] sm:h-[425px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
+                  <div className="w-[120px] h-[260px] sm:w-[196px] sm:h-[387px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
                       <img 
                         src="/phone1.jpg" 
                         alt="OOTD 게시물 1" 
@@ -93,7 +93,7 @@ export default function OOTDSection() {
                   </div>
                 </div>
                 <div className="relative mt-4 sm:mt-8">
-                  <div className="w-[120px] h-[260px] sm:w-[195px] sm:h-[425px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
+                  <div className="w-[120px] h-[260px] sm:w-[196px] sm:h-[387px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
                       <img 
                         src="/phone2.jpg" 
                         alt="OOTD 게시물 2" 
@@ -141,7 +141,7 @@ export default function OOTDSection() {
                 style={{ transitionDelay: '1000ms' }}
               >
                 <div className="relative">
-                  <div className="w-[120px] h-[260px] sm:w-[195px] sm:h-[425px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
+                  <div className="w-[120px] h-[260px] sm:w-[196px] sm:h-[387px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
                       <img 
                         src="/phone3.jpg" 
                         alt="리워드 확인 1" 
@@ -150,7 +150,7 @@ export default function OOTDSection() {
                   </div>
                 </div>
                 <div className="relative mt-4 sm:mt-8">
-                  <div className="w-[120px] h-[260px] sm:w-[195px] sm:h-[425px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
+                  <div className="w-[120px] h-[260px] sm:w-[196px] sm:h-[387px] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
                       <img 
                         src="/phone4.jpg" 
                         alt="리워드 확인 2" 

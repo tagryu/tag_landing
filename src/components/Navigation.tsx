@@ -40,12 +40,12 @@ export default function Navigation() {
           {/* Menu Items */}
           <div className="hidden md:flex items-center gap-10 mr-8">
             <button
-              onClick={() => scrollToSection('service-intro')}
+              onClick={() => scrollToSection('picksel-intro')}
               className={`text-lg font-bold transition-colors ${
                 isScrolled ? 'text-[#07163D] hover:text-[#243B7A]' : 'text-[#07163D] hover:text-[#243B7A]'
               }`}
             >
-              서비스 소개
+              픽셀소개
             </button>
             <button
               onClick={() => scrollToSection('pre-registration')}
@@ -54,14 +54,6 @@ export default function Navigation() {
               }`}
             >
               사전예약
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className={`text-lg font-bold transition-colors ${
-                isScrolled ? 'text-[#07163D] hover:text-[#243B7A]' : 'text-[#07163D] hover:text-[#243B7A]'
-              }`}
-            >
-              문의하기
             </button>
           </div>
 
@@ -86,12 +78,12 @@ export default function Navigation() {
             <div className="px-6 py-4 space-y-4">
               <button
                 onClick={() => {
-                  scrollToSection('service-intro');
+                  scrollToSection('picksel-intro');
                   setIsMobileMenuOpen(false);
                 }}
                 className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
               >
-                서비스 소개
+                픽셀소개
               </button>
               <button
                 onClick={() => {
@@ -101,15 +93,6 @@ export default function Navigation() {
                 className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
               >
                 사전예약
-              </button>
-              <button
-                onClick={() => {
-                  scrollToSection('contact');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
-              >
-                문의하기
               </button>
             </div>
           </div>

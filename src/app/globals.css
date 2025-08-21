@@ -19,6 +19,47 @@ body {
   scroll-behavior: smooth;
 }
 
+/* 반응형 텍스트 크기 - clamp(최소값, 선호값, 최대값) */
+.responsive-text-xs {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+.responsive-text-sm {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.responsive-text-base {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+}
+
+.responsive-text-lg {
+  font-size: clamp(1.125rem, 3.5vw, 1.25rem);
+}
+
+.responsive-text-xl {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.responsive-text-2xl {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.responsive-text-3xl {
+  font-size: clamp(1.875rem, 6vw, 2.5rem);
+}
+
+.responsive-text-4xl {
+  font-size: clamp(2.25rem, 7vw, 3rem);
+}
+
+.responsive-text-5xl {
+  font-size: clamp(3rem, 8vw, 4rem);
+}
+
+.responsive-text-6xl {
+  font-size: clamp(3.75rem, 10vw, 5rem);
+}
+
 /* 토스 스타일 애니메이션 */
 @keyframes fadeInUp {
   from {
@@ -189,4 +230,38 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* 물결 애니메이션 버튼 */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.wave-button {
+  background: linear-gradient(to right, #155DFC, #9810FA);
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 4s infinite;
 }
