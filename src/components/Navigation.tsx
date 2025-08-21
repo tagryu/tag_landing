@@ -31,7 +31,7 @@ export default function Navigation() {
           {/* Logo */}
           <div className="flex items-center ml-4 sm:ml-8 md:ml-24">
             <img
-              src="/Logo.png"
+              src="/logo_picksell_navigation.svg"
               alt="TAG"
               className="h-5 sm:h-6 w-auto object-contain"
             />

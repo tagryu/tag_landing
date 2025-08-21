@@ -108,7 +108,7 @@ export default function RewardSection() {
             </p>
             <div className="mb-2">
               <img 
-                src="/Logo_mini.png" 
+                src="/logo_picksell_rewardsection.svg" 
                 alt="xpicksell" 
                 className="h-5 sm:h-6 mx-auto"
               />
