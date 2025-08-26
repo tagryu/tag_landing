@@ -225,20 +225,20 @@ export default function EarlyBirdSection() {
 
                 <div>
                   <label className="block text-[#07163D] mb-2 text-sm" style={{ fontFamily: 'Pretendard' }}>
-                    연락처 or Email
+                    인스타그램 or Email
                   </label>
                   <input
                     type="text"
                     value={formData.contact}
                     onChange={(e) => setFormData({...formData, contact: e.target.value})}
-                    placeholder="010-0000-0000 / email@email.com"
+                    placeholder="@yourinstagram or email@email.com"
                     required
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
                     style={{ fontFamily: 'Pretendard' }}
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <label className="block text-[#07163D] mb-2 text-sm" style={{ fontFamily: 'Pretendard' }}>
                     인스타그램 계정
                   </label>
@@ -251,7 +251,7 @@ export default function EarlyBirdSection() {
                     className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
                     style={{ fontFamily: 'Pretendard' }}
                   />
-                </div>
+                </div> */}
 
                 {submitMessage && (
                   <div className={`text-center p-3 rounded-lg ${

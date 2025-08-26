@@ -30,8 +30,8 @@ export default function HeroSection() {
         <div className="flex-1 flex items-center justify-center px-6 py-12">
           <div className={`transform transition-all duration-1000 text-center ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 sm:mb-8 leading-tight">
-              <span className="sm:hidden">좋아하는 일로 돈 버는<br/>새로운 공식</span>
-              <span className="hidden sm:inline">좋아하는 일로 돈 버는 새로운 공식 - 픽셀</span>
+              <span className="sm:hidden">팔로워 · 좋아요와 상관없이<br/>누구나 수익을! - 픽셀</span>
+              <span className="hidden sm:inline">팔로워 · 좋아요와 상관없이, 누구나 수익을! - 픽셀</span>
             </h1>
             
             {/* CTA 버튼 - 메인 타이틀 아래 위치 */}
