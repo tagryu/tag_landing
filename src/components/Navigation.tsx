@@ -41,7 +41,7 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-10 mr-8">
             <button
               onClick={() => scrollToSection('picksel-intro')}
-              className={`text-lg font-bold transition-colors ${
+              className={`text-lg font-bold transition-colors cursor-pointer ${
                 isScrolled ? 'text-[#07163D] hover:text-[#243B7A]' : 'text-[#07163D] hover:text-[#243B7A]'
               }`}
             >
@@ -49,7 +49,7 @@ export default function Navigation() {
             </button>
             <button
               onClick={() => scrollToSection('pre-registration')}
-              className={`text-lg font-bold transition-colors ${
+              className={`text-lg font-bold transition-colors cursor-pointer ${
                 isScrolled ? 'text-[#07163D] hover:text-[#243B7A]' : 'text-[#07163D] hover:text-[#243B7A]'
               }`}
             >
@@ -59,7 +59,7 @@ export default function Navigation() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden mr-4"
+            className="md:hidden mr-4 cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <svg className={`w-6 h-6 ${isScrolled ? 'text-[#07163D]' : 'text-[#07163D]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@ export default function Navigation() {
                   scrollToSection('picksel-intro');
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
+                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2 cursor-pointer"
               >
                 픽셀소개
               </button>
@@ -90,7 +90,7 @@ export default function Navigation() {
                   scrollToSection('pre-registration');
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2"
+                className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2 cursor-pointer"
               >
                 사전예약
               </button>

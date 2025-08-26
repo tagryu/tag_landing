@@ -265,7 +265,7 @@ export default function EarlyBirdSection() {
                   type="submit"
                   disabled={isSubmitting}
                   className={`w-full py-3 sm:py-4 rounded-full wave-button font-bold text-white transition-all hover:shadow-lg mt-4 sm:mt-6 text-sm sm:text-base relative ${
-                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                   }`}
                   style={{ 
                     fontFamily: 'Pretendard'

@@ -40,7 +40,7 @@ export default function HeroSection() {
               trackCTAClick('hero_cta_가장먼저경험하기');
               document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-6 sm:px-10 py-4 text-base sm:text-lg font-semibold text-white wave-button rounded-full hover:shadow-lg transition-all duration-300 inline-block relative"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 text-base sm:text-lg font-semibold text-white wave-button rounded-full hover:shadow-lg transition-all duration-300 inline-block relative cursor-pointer"
           >
             <span className="relative z-10">가장 먼저 경험하기</span>
           </button>
