@@ -50,7 +50,7 @@ export default function RevenueSection() {
             }}
           >
             <span className="sm:hidden">
-              내가 태그한 상품이<br/>
+              내가 게시물을 통해 상품이<br/>
               팔릴 때 마다 5%를 리워드로,<br/>
               <br/>
               <br/>
@@ -58,7 +58,7 @@ export default function RevenueSection() {
               살 때마다 5%를 할인 받아요.
             </span>
             <span className="hidden sm:inline">
-              내가 태그한 상품이 팔릴 때 마다 5%를 리워드로,<br/>
+              내가 게시물을 통해 상품이 팔릴 때 마다 5%를 리워드로,<br/>
               다른 사람이 태그한 상품을 살 때마다 5%를 할인 받아요.
             </span>
           </h2>

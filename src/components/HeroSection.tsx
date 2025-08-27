@@ -29,6 +29,16 @@ export default function HeroSection() {
       <div className="flex-1 flex flex-col justify-between z-10">
         <div className="flex-1 flex items-center justify-center px-6 py-12">
           <div className={`transform transition-all duration-1000 text-center ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            {/* 얼리버드 강조 메시지 */}
+            <div className="mb-6">
+              <div className="inline-block bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white px-6 py-3 rounded-full text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition-shadow duration-300">
+                🔥 OOTD로 수익낼 얼리버드 절찬리 모집중! <span className="text-yellow-300">딱 9/30까지</span>
+              </div>
+              <p className="text-white/90 text-sm sm:text-base mt-3">
+                일찍 시작할수록 더 많은 수익 기회!
+              </p>
+            </div>
+
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 sm:mb-8 leading-tight">
               <span className="sm:hidden">팔로워 · 좋아요와 상관없이<br/>누구나 수익을!</span>
               <span className="hidden sm:inline">팔로워 · 좋아요와 상관없이, 누구나 수익을!</span>
