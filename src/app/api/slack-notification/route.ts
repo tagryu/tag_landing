@@ -14,13 +14,13 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    // 필수 필드 검증
-    if (!body.name || !body.contact || !body.instagram) {
+    // 필수 필드 검증 (instagram은 선택사항)
+    if (!body.name || !body.contact) {
       return NextResponse.json(
         { 
           success: false,
           message: "Missing required fields",
-          error: "name, contact, and instagram are required"
+          error: "name and contact are required"
         },
         { 
           status: 400,
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     }
     
     const payload = {
-      text: `📩 얼리버드 예약:\n*이름:* ${body.name}\n*연락처:* ${body.contact}\n*인스타:* ${body.instagram}`
+      text: `📩 얼리버드 예약:\n*이름:* ${body.name}\n*연락처:* ${body.contact}${body.instagram ? `\n*인스타:* ${body.instagram}` : ''}`
     };
     
     // 환경 변수에서 URL 가져오기

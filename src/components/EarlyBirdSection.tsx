@@ -9,8 +9,7 @@ export default function EarlyBirdSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    contact: '',
-    instagram: ''
+    contact: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -43,26 +42,35 @@ export default function EarlyBirdSection() {
     setIsSubmitting(true);
     
     try {
-      // Supabase에 데이터 저장
       const { error } = await supabase
         .from('earlybird_registrations')
         .insert([
           {
             name: formData.name,
             phone: formData.contact,
-            instagram: formData.instagram,
+            instagram: '',  // 빈 문자열로 전송
             created_at: new Date().toISOString()
           }
         ]);
       
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase 에러 상세:', error);
+        console.error('에러 메시지:', error.message);
+        console.error('에러 코드:', error.code);
+        throw error;
+      }
+      
+      console.log('📝 폼 데이터 (Supabase 임시 비활성화):', {
+        name: formData.name,
+        contact: formData.contact
+      });
       
       // Slack으로 알림 전송 (API Route 사용)
       console.log('🚀 슬랙 알림 전송 시작...');
       console.log('📤 전송 데이터:', {
         name: formData.name,
         contact: formData.contact,
-        instagram: formData.instagram
+        instagram: ''  // 빈 문자열
       });
       
       const slackResponse = await fetch('/api/slack-notification', {
@@ -73,7 +81,7 @@ export default function EarlyBirdSection() {
         body: JSON.stringify({
           name: formData.name,
           contact: formData.contact,
-          instagram: formData.instagram
+          instagram: ''  // 빈 문자열
         })
       });
       
@@ -103,11 +111,11 @@ export default function EarlyBirdSection() {
       trackEarlybirdSubmit({
         name: formData.name,
         phone: formData.contact,
-        instagram: formData.instagram
+        instagram: ''  // 빈 문자열
       });
       
       setSubmitMessage('예약이 완료되었습니다! 곧 연락드리겠습니다.');
-      setFormData({ name: '', contact: '', instagram: '' });
+      setFormData({ name: '', contact: '' });
       
       setTimeout(() => {
         setSubmitMessage('');
