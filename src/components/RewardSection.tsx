@@ -32,6 +32,7 @@ export default function RewardSection() {
   return (
     <section 
       ref={sectionRef}
+      id="picksel-intro"
       className="bg-white flex items-center justify-center py-16 sm:py-20" 
       style={{ minHeight: '819px' }}
     >
