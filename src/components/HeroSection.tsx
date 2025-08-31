@@ -36,7 +36,7 @@ export default function HeroSection() {
                 trackCTAClick('hero_cta_얼리버드신청');
                 document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="inline-flex items-center px-5 py-2 text-base font-medium text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 cursor-pointer mb-3"
+              className="inline-flex items-center px-5 py-2 text-base font-medium text-white bg-white/30 backdrop-blur-md border border-white/40 rounded-full hover:bg-white/40 transition-all duration-300 cursor-pointer mb-3"
             >
               <span>🔥 OOTD로 수익낼 얼리버드 절찬리 모집중! <span className="text-yellow-300">딱 9/30까지</span></span>
             </div>
