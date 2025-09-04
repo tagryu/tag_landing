@@ -31,7 +31,7 @@ export default function Navigation() {
           {/* Logo */}
           <div className="flex items-center ml-4 sm:ml-8 md:ml-24">
             <img
-              src="/logo_picksell_navigation.svg"
+              src="/Logo_TAG.png"
               alt="TAG"
               className="h-5 sm:h-6 w-auto object-contain"
             />
@@ -45,7 +45,7 @@ export default function Navigation() {
                 isScrolled ? 'text-[#07163D] hover:text-[#243B7A]' : 'text-[#07163D] hover:text-[#243B7A]'
               }`}
             >
-              픽셀소개
+              태그소개
             </button>
             <button
               onClick={() => scrollToSection('pre-registration')}

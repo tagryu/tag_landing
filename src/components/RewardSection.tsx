@@ -108,9 +108,9 @@ export default function RewardSection() {
             </p>
             <div className="mb-2">
               <img 
-                src="/logo_picksell_rewardsection.svg" 
+                src="/logo_vert_3.png" 
                 alt="xpicksell" 
-                className="h-5 sm:h-6 mx-auto"
+                className="h-4 sm:h-5 mx-auto"
               />
             </div>
             <p className="text-white/80 text-sm" style={{ fontFamily: 'Pretendard' }}>
