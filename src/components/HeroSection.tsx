@@ -29,21 +29,37 @@ export default function HeroSection() {
       <div className="flex-1 flex flex-col justify-between z-10">
         <div className="flex-1 flex items-center justify-center px-6 py-12">
           <div className={`transform transition-all duration-1000 text-center ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 sm:mb-8 leading-tight">
+
+            {/* 상단 얼리버드 배지 */}
+            <div 
+              onClick={() => {
+                trackCTAClick('hero_cta_얼리버드신청');
+                document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center px-5 py-2 text-base font-medium text-white bg-white/30 backdrop-blur-md border border-white/40 rounded-full hover:bg-white/40 transition-all duration-300 cursor-pointer mb-3"
+            >
+              <span>🔥 OOTD로 수익낼 얼리버드 절찬리 모집중! <span className="text-yellow-300">딱 9/30까지</span></span>
+            </div>
+            
+            <p className="text-white/80 text-sm mb-8">
+              일찍 시작할수록 더 많은 수익 기회!
+            </p>
+
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-10 sm:mb-12 leading-tight">
               <span className="sm:hidden">팔로워 · 좋아요와 상관없이<br/>누구나 수익을!</span>
               <span className="hidden sm:inline">팔로워 · 좋아요와 상관없이, 누구나 수익을!</span>
             </h1>
             
-            {/* CTA 버튼 - 메인 타이틀 아래 위치 */}
+            {/* 메인 CTA 버튼 - 더 크고 눈에 띄게 */}
             <button 
-            onClick={() => {
-              trackCTAClick('hero_cta_가장먼저경험하기');
-              document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="w-full sm:w-auto px-6 sm:px-10 py-4 text-base sm:text-lg font-semibold text-white wave-button rounded-full hover:shadow-lg transition-all duration-300 inline-block relative cursor-pointer"
-          >
-            <span className="relative z-10">가장 먼저 경험하기</span>
-          </button>
+              onClick={() => {
+                trackCTAClick('hero_cta_가장먼저경험');
+                document.getElementById('pre-registration')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-xl font-bold text-white wave-button rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer transform"
+            >
+              가장 먼저 경험하기
+            </button>
 {/*             
             <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
               <span className="block sm:hidden">내가 언젠가 촬영한 콘텐츠를 공유</span>
