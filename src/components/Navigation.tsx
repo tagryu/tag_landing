@@ -83,7 +83,7 @@ export default function Navigation() {
                 }}
                 className="block w-full text-left text-lg font-bold text-[#07163D] hover:text-[#243B7A] py-2 cursor-pointer"
               >
-                픽셀소개
+                태그소개
               </button>
               <button
                 onClick={() => {
