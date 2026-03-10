@@ -24,9 +24,12 @@ export default function Footer() {
           </a>
         </div>
         
-        <div className="text-xs sm:text-sm text-white/60 space-y-2">
-          <p>문의: <a href="mailto:tag_official@tags.kr" className="text-white/80 hover:text-white transition-colors">tag_official@tags.kr</a></p>
-          <p>© 2025 TAG. All rights reserved.</p>
+        <div className="text-xs sm:text-sm text-white/60 space-y-1.5 sm:space-y-2">
+          <p>주식회사 태그 | 대표 류태규</p>
+          <p>사업자등록번호 : 792-81-03987</p>
+          <p>주소 : 부천시 원미구 소사로 487, 2층 에이-05호</p>
+          <p>연락처 : 010-8546-0413 | 이메일 : <a href="mailto:tag_official@tags.kr" className="text-white/80 hover:text-white transition-colors">tag_official@tags.kr</a></p>
+          <p className="pt-2 sm:pt-4">© 2025 TAG. All rights reserved.</p>
         </div>
       </div>
     </footer>
