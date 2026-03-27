@@ -186,31 +186,24 @@ function VisionSection() {
 
   const phases = [
     {
-      phase: 'Phase 0',
-      year: '2024',
-      title: '실전 역량 축적',
-      desc: '외주 개발, 마케팅으로 실전 역량 축적 및 자금 확보',
-      active: true,
-    },
-    {
       phase: 'Phase 1',
       year: '2025',
-      title: '서비스 런칭',
-      desc: '자체 서비스(태그) 런칭 및 초기 시장 검증 — 예비창업패키지 선정, 법인설립',
+      title: '예비창업패키지 선정',
+      desc: '예비창업패키지 선정 및 법인 설립. 자체 서비스 런칭과 초기 시장 검증을 시작합니다.',
       active: true,
     },
     {
       phase: 'Phase 2',
       year: '2026',
-      title: '사업 확장',
-      desc: '검증된 역량 기반 사업 확장 — 투자 유치, 팀 빌딩',
+      title: '투자 유치 및 서비스 런칭',
+      desc: '검증된 역량을 기반으로 투자를 유치하고, 본격적인 서비스 런칭과 사업 확장을 추진합니다.',
       active: false,
     },
     {
       phase: 'Phase 3',
       year: '2027~',
       title: '글로벌 진출',
-      desc: '카테고리 확장 및 글로벌 진출 검토',
+      desc: '카테고리를 확장하고 글로벌 시장 진출을 본격적으로 검토합니다.',
       active: false,
     },
   ];
@@ -239,7 +232,7 @@ function VisionSection() {
           {/* Horizontal line (desktop) */}
           <div className="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-gray-200" />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
             {phases.map((p, i) => (
               <div
                 key={p.phase}
@@ -260,7 +253,7 @@ function VisionSection() {
                 </div>
 
                 <div
-                  className={`p-5 rounded-2xl border transition-colors ${
+                  className={`p-5 rounded-2xl border transition-colors h-full flex flex-col ${
                     p.active
                       ? 'border-[#2A50FB]/20 bg-[#F5F6FF]'
                       : 'border-gray-100 bg-gray-50'
@@ -275,7 +268,7 @@ function VisionSection() {
                     </span>
                   </div>
                   <h3 className="text-base font-bold text-[#07163D] mb-1">{p.title}</h3>
-                  <p className="text-sm text-[#6A7282] leading-relaxed">{p.desc}</p>
+                  <p className="text-sm text-[#6A7282] leading-relaxed flex-1">{p.desc}</p>
                 </div>
               </div>
             ))}
