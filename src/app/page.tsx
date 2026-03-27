@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import './service.css';
 
 /* ─── Arrow Icon Component ─── */
@@ -46,9 +47,10 @@ function ServiceNav() {
   return (
     <>
       <nav className="sp-nav glass-panel">
-        <a href="/" className="sp-logo">
+        <Link href="/" className="sp-logo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/TAG_Logo_Navy.png" alt="TAG" className="sp-logo-img" />
-        </a>
+        </Link>
         <div className="nav-links">
           <a href="#">크리에이터</a>
           <a href="#">이용 방법</a>
