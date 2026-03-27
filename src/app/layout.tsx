@@ -22,6 +22,11 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Pretendard-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Pretendard-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+
+        {/* Space Grotesk for service page */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         
         {/* Google Tag Manager - 가장 최상단에 위치 */}
         <Script id="google-tag-manager" strategy="afterInteractive">

@@ -1,277 +1,138 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import CorporateNav from '@/components/CorporateNav';
+import { useState } from 'react';
+import './service.css';
 
-/* ─── Intersection Observer hook ─── */
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  return { ref, visible };
-}
-
-/* ─── Count-up hook ─── */
-function useCountUp(end: number, duration: number, start: boolean) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!start) return;
-    let startTime: number | null = null;
-    let raf: number;
-
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(progress * end));
-      if (progress < 1) {
-        raf = requestAnimationFrame(step);
-      }
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [end, duration, start]);
-
-  return count;
-}
-
-/* ─── SVG Icons ─── */
-function CodeIcon() {
+/* ─── Arrow Icon Component ─── */
+function ArrowIcon() {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="12" fill="#EEF2FF" />
-      <path d="M16 14L10 20L16 26" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M24 14L30 20L24 26" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M22 12L18 28" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" />
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7" />
     </svg>
   );
 }
 
-function LightbulbIcon() {
+/* ─── Growth Icon ─── */
+function GrowthIcon() {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="12" fill="#EEF2FF" />
-      <path d="M20 10C16.134 10 13 13.134 13 17C13 19.39 14.2 21.5 16 22.74V25C16 25.55 16.45 26 17 26H23C23.55 26 24 25.55 24 25V22.74C25.8 21.5 27 19.39 27 17C27 13.134 23.866 10 20 10Z" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17 29H23" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" />
-      <path d="M18 32H22" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" />
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M23 6l-9.5 9.5-5-5L1 18" />
+      <path d="M17 6h6v6" />
     </svg>
   );
 }
 
-function MegaphoneIcon() {
+/* ─── Hamburger Icon ─── */
+function HamburgerIcon() {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="40" height="40" rx="12" fill="#EEF2FF" />
-      <path d="M28 12L16 17H12C11.45 17 11 17.45 11 18V22C11 22.55 11.45 23 12 23H16L28 28V12Z" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 23V28C16 28.55 16.45 29 17 29H19C19.55 29 20 28.55 20 28V23" stroke="#2A50FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M3 7h18M3 12h18M3 17h18" />
     </svg>
   );
 }
 
-function MailIcon() {
+function CloseIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
-      <path d="M22 7L12 13L2 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M18 6L6 18M6 6l12 12" />
     </svg>
   );
 }
 
-function HandshakeIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 11L12 6L14 8L10 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17 11L12 6L10 8L14 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M3 17L7 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M21 17L17 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M9 18L12 15L15 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function RocketIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4.5 16.5C3 18 3 21 3 21C3 21 6 21 7.5 19.5C8.33 18.67 8.33 17.33 7.5 16.5C6.67 15.67 5.33 15.67 4.5 16.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M14.5 4C14.5 4 18 2 21 3C22 6 20 9.5 20 9.5L11 18.5L5.5 13L14.5 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="17" cy="7" r="1" fill="currentColor" />
-    </svg>
-  );
-}
-
-/* ─── Section: Hero ─── */
-function HeroSection() {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
+/* ─── Navigation ─── */
+function ServiceNav() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#07163D]">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#07163D] via-[#0d2157] to-[#162d6b]" />
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)',
-        backgroundSize: '60px 60px'
-      }} />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <div
-          className={`transition-all duration-1000 ${
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <Image
-            src="/TAG_Logo_white.png"
-            alt="TAG"
-            width={120}
-            height={48}
-            className="h-10 lg:h-12 w-auto mx-auto mb-10"
-          />
+    <>
+      <nav className="sp-nav glass-panel">
+        <a href="/" className="sp-logo">
+          <img src="/TAG_Logo_Navy.png" alt="TAG" className="sp-logo-img" />
+        </a>
+        <div className="nav-links">
+          <a href="#">크리에이터</a>
+          <a href="#">이용 방법</a>
+          <a href="#" className="nav-login">로그인</a>
         </div>
+        <button className="mobile-menu-btn" onClick={() => setMenuOpen(true)} aria-label="메뉴 열기">
+          <HamburgerIcon />
+        </button>
+      </nav>
 
-        <h1
-          className={`text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 transition-all duration-1000 delay-200 ${
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          신뢰 위에 가치를 더합니다
-        </h1>
-
-        <p
-          className={`text-base md:text-lg lg:text-xl text-white/70 mb-12 leading-relaxed transition-all duration-1000 delay-400 ${
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          개발, 마케팅, 기획. 세 가지 역량으로 서비스를 직접 만듭니다.
-        </p>
-
-        <Link
-          href="/pre-registration"
-          className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-white/5 text-white/90 text-sm font-medium hover:bg-white/10 transition-all duration-1000 delay-500 ${
-            loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="inline-block w-2 h-2 rounded-full bg-[#2A50FB] animate-pulse" />
-          Our Service — Coming Soon
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Section: Vision & Roadmap ─── */
-function VisionSection() {
-  const section = useReveal();
-
-  const phases = [
-    {
-      phase: 'Phase 1',
-      year: '2025',
-      title: '예비창업패키지 선정',
-      desc: '예비창업패키지 선정 및 법인 설립. 자체 서비스 런칭과 초기 시장 검증을 시작합니다.',
-      active: true,
-    },
-    {
-      phase: 'Phase 2',
-      year: '2026',
-      title: '투자 유치 및 서비스 런칭',
-      desc: '검증된 역량을 기반으로 투자를 유치하고, 본격적인 서비스 런칭과 사업 확장을 추진합니다.',
-      active: false,
-    },
-    {
-      phase: 'Phase 3',
-      year: '2027~',
-      title: '글로벌 진출',
-      desc: '카테고리를 확장하고 글로벌 시장 진출을 본격적으로 검토합니다.',
-      active: false,
-    },
-  ];
-
-  return (
-    <section id="vision" className="py-24 lg:py-32 bg-white">
+      {/* Mobile Menu */}
       <div
-        ref={section.ref}
-        className={`max-w-6xl mx-auto px-6 lg:px-8 transition-all duration-700 ${
-          section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-[#2A50FB] tracking-wide mb-3">VISION & ROADMAP</p>
-          <h2 className="text-2xl md:text-4xl font-bold text-[#07163D] mb-6">
-            우리가 만들어가는 것들
-          </h2>
-          <p className="text-base md:text-lg text-[#6A7282] max-w-3xl mx-auto leading-relaxed">
-            우리는 직접 서비스를 만들며 시장을 경험했습니다. 그 과정에서 쌓은 개발, 기획, 마케팅 역량으로
-            단기 수익을 넘어 장기적인 성장을 만들어갑니다.
-          </p>
+        className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`}
+        onClick={() => setMenuOpen(false)}
+      />
+      <div className={`mobile-menu-panel ${menuOpen ? 'open' : ''}`}>
+        <button className="mobile-menu-close" onClick={() => setMenuOpen(false)} aria-label="메뉴 닫기">
+          <CloseIcon />
+        </button>
+        <a href="#" onClick={() => setMenuOpen(false)}>크리에이터</a>
+        <a href="#" onClick={() => setMenuOpen(false)}>이용 방법</a>
+        <a href="#" onClick={() => setMenuOpen(false)}>로그인</a>
+      </div>
+    </>
+  );
+}
+
+/* ─── Hero Section ─── */
+function HeroSection() {
+  return (
+    <section className="hero sp-container">
+      <div className="hero-grid">
+        <div className="hero-content">
+          <div className="pill-badge">
+            <span className="tag-dot" /> 크리에이터 도구
+            <span style={{ color: 'var(--text-inverse-sec)', margin: '0 4px', opacity: 0.5 }}>|</span>
+            <span className="en-font">15~20% 커미션</span>
+          </div>
+
+          <h1>어차피 올리는 OOTD,<br />올릴 때마다 수익이 생긴다면?</h1>
+
+          <p>매일 하는 코디 공유에 상품을 태그하세요. 당신의 게시물 하나가 판매로 이어질 때마다, 판매가의 15~20%가 수익이 됩니다. 팔로워 300명이어도 상관없습니다.</p>
+
+          <div className="hero-cta-group">
+            <a href="#" className="btn btn-primary">
+              지금 시작하기
+              <div className="btn-icon">
+                <ArrowIcon />
+              </div>
+            </a>
+          </div>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Horizontal line (desktop) */}
-          <div className="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-gray-200" />
+        <div className="hero-visual">
+          <div className="phone-mockup">
+            <div className="phone-screen">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="OOTD Fashion Style"
+                className="phone-bg-img"
+              />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className={`relative transition-all duration-700 delay-${i * 150} ${
-                  section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-                style={{ transitionDelay: section.visible ? `${i * 150}ms` : '0ms' }}
-              >
-                {/* Dot */}
-                <div className="hidden md:flex items-center justify-center mb-8">
-                  <div
-                    className={`w-3 h-3 rounded-full ring-4 ${
-                      p.active
-                        ? 'bg-[#2A50FB] ring-[#2A50FB]/20'
-                        : 'bg-gray-300 ring-gray-100'
-                    }`}
-                  />
-                </div>
+              <div className="scanner-line" />
+              <div className="scanner-ring" />
 
-                <div
-                  className={`p-5 rounded-2xl border transition-colors h-full flex flex-col ${
-                    p.active
-                      ? 'border-[#2A50FB]/20 bg-[#F5F6FF]'
-                      : 'border-gray-100 bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`text-xs font-bold ${p.active ? 'text-[#2A50FB]' : 'text-gray-400'}`}>
-                      {p.phase}
-                    </span>
-                    <span className={`text-xs ${p.active ? 'text-[#07163D]' : 'text-gray-400'}`}>
-                      {p.year}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold text-[#07163D] mb-1">{p.title}</h3>
-                  <p className="text-sm text-[#6A7282] leading-relaxed flex-1">{p.desc}</p>
-                </div>
+              <div className="product-tag">
+                <div className="tag-dot" />
+                <span className="tag-text">Acne Studios Jacket</span>
               </div>
-            ))}
+              <div className="product-tag" style={{ top: '70%', left: '20%' }}>
+                <div className="tag-dot" />
+                <span className="tag-text">Wide Denim</span>
+              </div>
+            </div>
+
+            <div className="glass-panel-dark floating-widget">
+              <div className="widget-label">Estimated Earnings</div>
+              <div className="en-font widget-value">$1,248</div>
+              <div className="widget-growth">
+                <GrowthIcon />
+                오늘 +18%
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -279,55 +140,50 @@ function VisionSection() {
   );
 }
 
-/* ─── Section: Core Capabilities ─── */
-function CapabilitiesSection() {
-  const section = useReveal();
-
-  const cards = [
+/* ─── Problem Section ─── */
+function ProblemSection() {
+  const problems = [
     {
-      icon: <CodeIcon />,
-      title: '개발',
-      desc: '웹사이트, 쇼핑몰, 앱 등 풀스택 개발 역량 보유. 기획부터 배포까지 자체적으로 수행합니다.',
+      number: '01',
+      title: <>시간은 쓰는데,<br />수익은 0원</>,
+      desc: '게시물 하나를 올리기 위해 코디하고, 사진 찍고, 보정하는 데 주당 평균 4.2시간을 쓰지만, 82%의 크리에이터가 월 10만원 이하의 수익을 냅니다.',
     },
     {
-      icon: <LightbulbIcon />,
-      title: '기획',
-      desc: '예비창업패키지 등 국가사업 수주 경험. 사업화 전략과 투자 유치 역량을 갖추고 있습니다.',
+      number: '02',
+      title: <>브랜드 협찬?<br />팔로워 1만은 넘어야 합니다</>,
+      desc: '영향력은 팔로워 수로만 증명되지 않지만, 기존 시장은 마이크로 인플루언서의 실제 전환력을 외면합니다.',
     },
     {
-      icon: <MegaphoneIcon />,
-      title: '마케팅',
-      desc: '콘텐츠 기획, 퍼포먼스 마케팅, 브랜딩까지. 직접 운영한 마케팅 전략을 보유합니다.',
+      number: '03',
+      title: <>매달 패션에 37만원을 쓰지만,<br />돌아오는 건 없습니다</>,
+      desc: '자신의 돈으로 구매한 옷을 정성스럽게 리뷰해도, 소비자로 남을 뿐 생산자로서의 가치를 인정받지 못합니다.',
     },
   ];
 
   return (
-    <section id="capabilities" className="py-24 lg:py-32 bg-[#F8F9FC]">
-      <div
-        ref={section.ref}
-        className={`max-w-6xl mx-auto px-6 lg:px-8 transition-all duration-700 ${
-          section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-[#2A50FB] tracking-wide mb-3">CORE CAPABILITIES</p>
-          <h2 className="text-2xl md:text-4xl font-bold text-[#07163D]">
-            세 가지 힘으로 실행합니다
-          </h2>
+    <section className="section-problem">
+      <div className="sp-container">
+        <div className="section-header">
+          <div
+            className="pill-badge light"
+            style={{
+              marginBottom: '16px',
+              background: 'rgba(255,255,255,0.05)',
+              color: 'var(--accent)',
+              borderColor: 'var(--border-dark)',
+            }}
+          >
+            Current Reality
+          </div>
+          <h2 className="section-title">지금 이런 상황 아닌가요?</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {cards.map((card, i) => (
-            <div
-              key={card.title}
-              className={`bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-500 ${
-                section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-              style={{ transitionDelay: section.visible ? `${i * 120}ms` : '0ms' }}
-            >
-              <div className="mb-5">{card.icon}</div>
-              <h3 className="text-lg font-bold text-[#07163D] mb-3">{card.title}</h3>
-              <p className="text-sm text-[#6A7282] leading-relaxed">{card.desc}</p>
+        <div className="problem-grid">
+          {problems.map((p) => (
+            <div key={p.number} className="problem-card">
+              <div className="problem-number">{p.number}</div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
             </div>
           ))}
         </div>
@@ -336,134 +192,188 @@ function CapabilitiesSection() {
   );
 }
 
-/* ─── Section: Achievements ─── */
-function AchievementsSection() {
-  const section = useReveal();
-
-  const stats = [
-    { label: '외주 수행 프로젝트', value: 5, suffix: '건' },
-    { label: '공모전·국가사업 선정', value: 2, suffix: '건' },
-    { label: '컴퍼니빌더 프로그램', value: 1, suffix: '기' },
-  ];
-
+/* ─── Services Section ─── */
+function ServicesSection() {
   return (
-    <section id="achievements" className="py-24 lg:py-32 bg-white">
-      <div
-        ref={section.ref}
-        className={`max-w-6xl mx-auto px-6 lg:px-8 transition-all duration-700 ${
-          section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-[#2A50FB] tracking-wide mb-3">ACHIEVEMENTS</p>
-          <h2 className="text-2xl md:text-4xl font-bold text-[#07163D]">
-            숫자로 증명합니다
-          </h2>
+    <section className="section-services">
+      <div className="sp-container">
+        <div className="section-header" style={{ marginTop: '40px' }}>
+          <h2 className="section-title">TAG가 해결합니다</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {stats.map((stat, i) => (
-            <StatCard key={stat.label} stat={stat} index={i} visible={section.visible} />
-          ))}
+        <div className="services-grid">
+          {/* Service Card 1 */}
+          <div className="glass-panel service-card service-card-1">
+            <div className="card-visual">
+              <div className="bar" style={{ height: '20%' }} />
+              <div className="bar dark" style={{ height: '40%' }} />
+              <div className="bar" style={{ height: '30%' }} />
+              <div className="bar active" style={{ height: '80%' }} />
+              <div className="bar" style={{ height: '50%' }} />
+              <div className="bar" style={{ height: '60%' }} />
+              <div className="bar dark" style={{ height: '90%' }} />
+              <div className="bar" style={{ height: '45%' }} />
+            </div>
+            <h3>태그 한 번,<br />수익 파이프라인 완성</h3>
+            <p>링크 하나만 복사해서 붙여넣으세요. 판매가 발생할 때마다 업계 최고 수준인 15-20%의 커미션이 자동으로 정산됩니다.</p>
+            <div className="service-metric">예상 월 수익 23~45만원</div>
+          </div>
+
+          {/* Service Card 2 */}
+          <div className="glass-panel service-card service-card-2">
+            <div className="card-visual">
+              <div className="ai-nodes" />
+              <div className="ai-highlight" />
+              <div className="ai-highlight" style={{ top: '60%', left: '70%', width: '20px', height: '20px', opacity: 0.5 }} />
+            </div>
+            <h3>AI 에이전트가<br />콘텐츠 전략을 세워줍니다</h3>
+            <p>현재 트렌드, 최적의 해시태그, 업로드 타이밍을 다중 AI 에이전트가 분석하여 제안합니다. 당신은 코디에만 집중하세요.</p>
+            <div className="service-metric">평균 클릭률 2.4배 상승</div>
+          </div>
+
+          {/* Service Card 3 */}
+          <div className="glass-panel service-card">
+            <div
+              className="card-visual"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                marginBottom: '40px',
+                justifyContent: 'flex-end',
+                height: '120px',
+              }}
+            >
+              <div style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
+                borderBottom: '1px solid var(--border-light)',
+                paddingBottom: '8px',
+              }}>
+                <span className="en-font" style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Conversion Rate</span>
+                <span className="en-font" style={{ fontSize: '2rem', fontWeight: 700 }}>4.8%</span>
+              </div>
+              <div style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
+                borderBottom: '1px solid var(--border-light)',
+                paddingBottom: '8px',
+              }}>
+                <span className="en-font" style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Total Tags</span>
+                <span className="en-font" style={{ fontSize: '2rem', fontWeight: 700 }}>128</span>
+              </div>
+            </div>
+            <h3>내 영향력을 숫자로<br />증명하는 대시보드</h3>
+            <p>실시간 데이터 분석을 통해 어떤 아이템이 가장 반응이 좋은지 확인하세요. 이 데이터는 브랜드 협찬을 위한 강력한 포트폴리오가 됩니다.</p>
+            <div className="service-metric">브랜드 협찬 성사율 3.1배 증가</div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function StatCard({
-  stat,
-  index,
-  visible,
-}: {
-  stat: { label: string; value: number; suffix: string };
-  index: number;
-  visible: boolean;
-}) {
-  const count = useCountUp(stat.value, 1500, visible);
-
+/* ─── About & Track Record Section ─── */
+function AboutSection() {
   return (
-    <div
-      className={`text-center p-10 rounded-2xl bg-[#F8F9FC] border border-gray-100 transition-all duration-700 ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}
-      style={{ transitionDelay: visible ? `${index * 120}ms` : '0ms' }}
-    >
-      <div className="text-5xl lg:text-6xl font-bold text-[#07163D] mb-3">
-        {count}
-        <span className="text-2xl lg:text-3xl text-[#2A50FB] ml-1">{stat.suffix}</span>
+    <section className="sp-container">
+      <div className="section-split">
+        {/* About Team */}
+        <div className="about-team">
+          <div className="pill-badge light" style={{ marginBottom: '24px' }}>Team TAG</div>
+          <h2>&quot;크리에이터의 첫 수익&quot;에<br />집착하는 팀</h2>
+          <p>우리는 누구나 자신의 취향으로 돈을 벌 수 있는 생태계를 만듭니다. 기술과 데이터를 통해 패션 크리에이터의 영향력을 실제 가치로 치환합니다.</p>
+
+          <table className="milestone-table">
+            <tbody>
+              <tr>
+                <td className="milestone-year">2025</td>
+                <td className="milestone-desc">예비창업패키지 선정</td>
+              </tr>
+              <tr>
+                <td className="milestone-year">2026</td>
+                <td className="milestone-desc">벤처스퀘어로부터 Seed 투자 유치</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Track Record */}
+        <div className="track-record">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 700 }}>우리가 만들어 온 것들</h3>
+          </div>
+
+          <div className="track-record-grid">
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="track-item active">Project {String(n).padStart(2, '0')}</div>
+            ))}
+            {[5, 6, 7, 8].map((n) => (
+              <div key={n} className="track-item">{String(n).padStart(2, '0')}</div>
+            ))}
+          </div>
+
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '0.875rem' }}>
+            패션, 커머스, AI 분야에서 8개의 프로덕트를 성공적으로 런칭한 경험을 바탕으로 TAG를 만듭니다.
+          </p>
+
+          <a href="#" className="btn btn-primary" style={{ padding: '12px 24px', fontSize: '1rem' }}>
+            자세히 보기 <span style={{ fontWeight: 400, color: 'var(--text-tertiary)' }}>(Coming soon)</span>
+          </a>
+        </div>
       </div>
-      <p className="text-sm text-[#6A7282] font-medium">{stat.label}</p>
-    </div>
+    </section>
   );
 }
 
-/* ─── Section: News & Media ─── */
+/* ─── News Section ─── */
 function NewsSection() {
-  const section = useReveal();
-
   return (
-    <section id="news" className="py-24 lg:py-32 bg-[#F8F9FC]">
-      <div
-        ref={section.ref}
-        className={`max-w-6xl mx-auto px-6 lg:px-8 transition-all duration-700 ${
-          section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-[#2A50FB] tracking-wide mb-3">NEWS & MEDIA</p>
-          <h2 className="text-2xl md:text-4xl font-bold text-[#07163D]">
-            우리의 이야기를 직접 확인하세요
-          </h2>
+    <section className="section-news">
+      <div className="sp-container">
+        <div className="section-header">
+          <div className="pill-badge light" style={{ marginBottom: '16px' }}>News &amp; Media</div>
+          <h2 className="section-title">TAG의 이야기</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Real article card */}
+        <div className="news-grid">
+          {/* Real article */}
           <a
             href="https://www.venturesquare.net/1064584/"
             target="_blank"
             rel="noopener noreferrer"
-            className={`group block rounded-2xl overflow-hidden bg-white border border-gray-100 hover:shadow-lg transition-all duration-500 ${
-              section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ transitionDelay: section.visible ? '0ms' : '0ms' }}
+            className="news-card news-card-featured"
           >
-            {/* Thumbnail */}
-            <div className="relative h-48 bg-gradient-to-br from-[#07163D] to-[#243B7A] flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(42,80,251,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(141,22,250,0.3) 0%, transparent 50%)',
-              }} />
-              <Image
-                src="/TAG_Logo_white.png"
-                alt="TAG"
-                width={80}
-                height={32}
-                className="h-8 w-auto opacity-60 group-hover:opacity-80 transition-opacity"
-              />
+            <div className="news-thumbnail">
+              <div className="news-thumbnail-overlay" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/TAG_Logo_white.png" alt="TAG" className="news-thumbnail-logo" />
             </div>
-            <div className="p-5">
-              <span className="inline-block text-xs font-semibold text-[#2A50FB] mb-2">벤처스퀘어</span>
-              <h3 className="text-sm font-bold text-[#07163D] leading-snug group-hover:text-[#2A50FB] transition-colors line-clamp-3">
-                팔로워보다 중요한 건 실제 구매... 류태규 대표가 설계한 예비 인플루언서 플랫폼, 태그
-              </h3>
+            <div className="news-body">
+              <span className="news-source en-font">VentureSquare</span>
+              <h3 className="news-title">팔로워보다 중요한 건 실제 구매... 류태규 대표가 설계한 예비 인플루언서 플랫폼, 태그</h3>
+              <div className="news-read-more en-font">
+                Read more
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
           </a>
 
           {/* Placeholder cards */}
           {[0, 1].map((i) => (
-            <div
-              key={i}
-              className={`rounded-2xl overflow-hidden bg-white border border-gray-100 flex flex-col items-center justify-center p-10 transition-all duration-500 ${
-                section.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-              style={{ transitionDelay: section.visible ? `${(i + 1) * 120}ms` : '0ms' }}
-            >
-              <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M4 7H16M4 10H12M4 13H14" stroke="#C0C5CE" strokeWidth="1.5" strokeLinecap="round" />
+            <div key={i} className="news-card news-card-placeholder">
+              <div className="news-placeholder-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M4 7h16M4 11h12M4 15h14" />
                 </svg>
               </div>
-              <p className="text-sm text-[#6A7282] text-center">더 많은 소식이<br />준비되고 있습니다</p>
+              <p className="news-placeholder-text">더 많은 소식이<br />준비되고 있습니다</p>
             </div>
           ))}
         </div>
@@ -472,94 +382,79 @@ function NewsSection() {
   );
 }
 
-/* ─── Section: Footer ─── */
-function CorporateFooter() {
+/* ─── CTA Section ─── */
+function CTASection() {
   return (
-    <footer id="contact" className="bg-[#07163D] text-white">
-      {/* CTA Row */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-white/80">
-              <MailIcon />
-              <h3 className="text-base font-bold text-white">외주 개발 문의</h3>
-            </div>
-            <p className="text-sm text-white/50 mb-4">웹·앱 개발, 마케팅 프로젝트를 의뢰하세요.</p>
-            <a
-              href="mailto:tag_official@tags.kr?subject=외주 개발 문의"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium hover:bg-white/10 transition-colors"
+    <section className="section-cta sp-container">
+      <div className="cta-grid">
+        {/* Creator CTA */}
+        <div className="cta-card cta-creator">
+          <div>
+            <div
+              className="pill-badge"
+              style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--accent)', marginBottom: '24px' }}
             >
-              문의하기
-            </a>
+              For Creators
+            </div>
+            <h2>크리에이터로 시작하기</h2>
+            <p>가입하고, 첫 OOTD에 태그를 달아보세요.<br />팔로워 수는 상관없습니다.</p>
           </div>
+          <a href="#" className="btn btn-accent">
+            무료로 시작하기
+            <div className="btn-icon">
+              <ArrowIcon />
+            </div>
+          </a>
+        </div>
 
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-white/80">
-              <HandshakeIcon />
-              <h3 className="text-base font-bold text-white">투자·파트너 문의</h3>
-            </div>
-            <p className="text-sm text-white/50 mb-4">투자 및 사업 협력에 관심 있으신 분은 연락주세요.</p>
-            <a
-              href="mailto:tag_official@tags.kr?subject=투자·파트너 문의"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium hover:bg-white/10 transition-colors"
-            >
-              문의하기
-            </a>
+        {/* B2B CTA */}
+        <div className="cta-card cta-b2b glass-panel">
+          <div>
+            <div className="pill-badge light" style={{ marginBottom: '24px' }}>For Business</div>
+            <h2>TAG 팀과 함께 만들기</h2>
+            <p>TAG를 만든 팀의 기술력과 실행력이 필요하신가요? 엔터프라이즈 레벨의 개발을 지원합니다.</p>
           </div>
-
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-white/80">
-              <RocketIcon />
-              <h3 className="text-base font-bold text-white">서비스 문의</h3>
+          <a href="#" className="btn btn-primary">
+            외주 개발 문의하기
+            <div className="btn-icon">
+              <ArrowIcon />
             </div>
-            <p className="text-sm text-white/50 mb-4">TAG 서비스에 대해 더 알아보세요.</p>
-            <Link
-              href="/pre-registration"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium hover:bg-white/10 transition-colors"
-            >
-              사전예약 바로가기
-            </Link>
-          </div>
+          </a>
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/TAG_Logo_white.png"
-              alt="TAG"
-              width={60}
-              height={24}
-              className="h-5 w-auto opacity-60"
-            />
-            <span className="text-xs text-white/40">
-              &copy; 2025 주식회사 태그. All rights reserved.
-            </span>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-white/40">
-            <a href="#" className="hover:text-white/60 transition-colors">개인정보처리방침</a>
-            <span>|</span>
-            <a href="#" className="hover:text-white/60 transition-colors">이용약관</a>
-          </div>
+/* ─── Footer ─── */
+function ServiceFooter() {
+  return (
+    <footer className="sp-footer">
+      <div className="sp-container">
+        <div className="footer-business-info">
+          <p>주식회사 태그 | 대표 류태규</p>
+          <p>사업자등록번호 : 792-81-03987</p>
+          <p>주소 : 부천시 원미구 소사로 487, 2층 에이-05호</p>
+          <p>연락처 : 010-8546-0413 | 이메일 : <a href="mailto:tag_official@tags.kr" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>tag_official@tags.kr</a></p>
         </div>
+        <p className="en-font footer-copyright">&copy; 2026 TAG. All rights reserved.</p>
       </div>
     </footer>
   );
 }
 
 /* ─── Main Page ─── */
-export default function Home() {
+export default function ServicePage() {
   return (
-    <div className="min-h-screen bg-white">
-      <CorporateNav />
+    <div className="service-page">
+      <ServiceNav />
       <HeroSection />
-      <VisionSection />
-      <CapabilitiesSection />
-      <AchievementsSection />
+      <ProblemSection />
+      <ServicesSection />
+      <AboutSection />
       <NewsSection />
-      <CorporateFooter />
+      <CTASection />
+      <ServiceFooter />
     </div>
   );
 }
