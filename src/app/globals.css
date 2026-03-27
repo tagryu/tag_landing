@@ -321,3 +321,11 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select {
   );
   animation: shimmer 4s infinite;
 }
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

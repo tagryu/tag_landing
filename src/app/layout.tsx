@@ -3,8 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TAG - 당신의 모든 콘텐츠가 수익이 되는 곳",
-  description: "내 게시물에 태그된 상품을 다른 사람이 구매할 땐 5% 리워드를, 다른 사람의 게시물에 태그된 상품을 구매할 땐 5% 할인을 받아요.",
+  title: "TAG - 신뢰 위에 가치를 더합니다 | 주식회사 태그",
+  description: "개발, 마케팅, 기획. 세 가지 역량으로 서비스를 직접 만드는 주식회사 태그입니다.",
   icons: {
     icon: '/icon.png',
   },
