@@ -143,7 +143,7 @@ function HeroSection({ onOpenForm }: { onOpenForm: () => void }) {
               <path d="M21 15.46l-5.27-.61a2 2 0 00-1.78.62l-1.27 1.27a16 16 0 01-7.43-7.43l1.27-1.27a2 2 0 00.62-1.78L6.54 3a2 2 0 00-2-1.74H3.18A2 2 0 001.2 3.45 19 19 0 0020.55 22.8a2 2 0 002.19-1.98v-1.36a2 2 0 00-1.74-2z" />
             </svg>
           </div>
-          <div className="flow-card-label">자연 판매 발생</div>
+          <div className="flow-card-label">인플루언서 마케팅 효과 및 판매 발생</div>
           <div className="flow-card-sub">소비자</div>
         </div>
       </div>
@@ -223,7 +223,7 @@ function HowItWorksSection() {
     },
     {
       n: '04',
-      title: '자연 판매 발생',
+      title: '인플루언서 마케팅 효과 및 판매 발생',
       desc: '게시물을 본 팔로워가 태그를 통해 구매. 자연스러운 마케팅이 시작됩니다.',
     },
   ];

@@ -546,11 +546,36 @@
   .partners-page .partners-hero-visual {
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    gap: 12px;
   }
 
-  .partners-page .flow-card { flex: 1 1 240px; min-width: 240px; }
-  .partners-page .flow-arrow { transform: rotate(0deg); }
+  .partners-page .flow-card {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 20px 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .partners-page .flow-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .partners-page .flow-card-label { font-size: 0.95rem; }
+  .partners-page .flow-card-sub { font-size: 0.75rem; }
+  .partners-page .flow-card:hover { transform: translateY(-4px); }
+
+  .partners-page .flow-arrow {
+    transform: rotate(0deg);
+    flex-shrink: 0;
+    align-self: center;
+  }
 
   .partners-page .how-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
   .partners-page .how-connector { display: none; }
