@@ -601,7 +601,7 @@ function ServiceFooter() {
         <div className="footer-business-info">
           <p>주식회사 태그 | 대표 류태규</p>
           <p>사업자등록번호 : 792-81-03987</p>
-          <p>주소 : 부천시 원미구 소사로 487, 2층 에이-05호</p>
+          <p>주소 : 부천시 원미구 소사로 487, 208호</p>
           <p>연락처 : 010-8546-0413 | 이메일 : <a href="mailto:tag_official@tags.kr" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>tag_official@tags.kr</a></p>
         </div>
         <p className="en-font footer-copyright">&copy; 2026 TAG. All rights reserved.</p>

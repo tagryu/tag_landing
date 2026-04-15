@@ -263,25 +263,29 @@ function StatsSection() {
     {
       value: '20배',
       unit: 'ROI',
-      label: '$50 투자 → $1,000+ 수익',
+      label: '나노 인플루언서 마케팅 평균 ROI',
+      desc: '$50 한 건 캠페인이 평균 $1,000 이상의 매출로 이어집니다. 메가 인플루언서 단가의 1/100 비용으로 시작해 동일하거나 더 높은 매출을 만들어냅니다.',
       color: 'stat-blue',
     },
     {
       value: '$5.78',
       unit: '',
-      label: '1달러 평균 수익',
+      label: '1달러당 마케팅 수익',
+      desc: '나노 인플루언서 마케팅에 1달러를 쓸 때 평균 $5.78의 매출이 발생합니다. 일반 디스플레이·검색 광고 평균(약 $2)의 2배 이상입니다.',
       color: 'stat-orange',
     },
     {
       value: '44%',
       unit: '',
-      label: '브랜드 나노 선호도',
+      label: '브랜드의 나노 선호도',
+      desc: '글로벌 브랜드 마케터의 44%가 메가·매크로 대신 나노 인플루언서를 우선 선택한다고 응답. 효율성과 진정성이 핵심 이유입니다.',
       color: 'stat-green',
     },
     {
       value: '92%',
       unit: '',
-      label: '소비자 추천 신뢰도',
+      label: '소비자의 추천 신뢰도',
+      desc: '소비자 92%가 브랜드 광고보다 실제 사람의 추천을 더 신뢰합니다. 협찬·유료 표시가 없는 실구매 후기는 일반 광고 대비 4~5배 높은 전환율을 보입니다.',
       color: 'stat-pink',
     },
   ];
@@ -306,13 +310,14 @@ function StatsSection() {
                 {s.unit && <span className="stat-unit"> {s.unit}</span>}
               </div>
               <div className="stat-label">{s.label}</div>
+              <div className="stat-desc">{s.desc}</div>
             </div>
           ))}
         </div>
 
         {/* Comparison Table */}
         <div className="comparison-wrap">
-          <h3 className="comparison-title">티어별 마케팅 효율 비교</h3>
+          <h3 className="comparison-title">나노 인플루언서의 마케팅 효율</h3>
           <div className="comparison-table-wrap">
             <table className="comparison-table">
               <thead>
@@ -347,27 +352,6 @@ function StatsSection() {
                   <td className="col-highlight"><span className="up-badge">2.3배 ↑</span></td>
                 </tr>
                 <tr>
-                  <td>CPE (TikTok)</td>
-                  <td className="en-font">$0.06</td>
-                  <td className="en-font dim">$0.80+</td>
-                  <td className="en-font dim">-</td>
-                  <td className="col-highlight"><span className="down-badge">13배 저렴</span></td>
-                </tr>
-                <tr>
-                  <td>CPE (Instagram)</td>
-                  <td className="en-font">$0.59</td>
-                  <td className="en-font dim">$3.50+</td>
-                  <td className="en-font dim">-</td>
-                  <td className="col-highlight"><span className="down-badge">6배 저렴</span></td>
-                </tr>
-                <tr>
-                  <td>1건당 비용</td>
-                  <td className="en-font">$50-500</td>
-                  <td className="en-font dim">$5,000+</td>
-                  <td className="en-font dim">-</td>
-                  <td className="col-highlight"><span className="down-badge">1/10</span></td>
-                </tr>
-                <tr>
                   <td>스폰서 참여율</td>
                   <td className="en-font">48%</td>
                   <td className="en-font dim">26%</td>
@@ -378,6 +362,70 @@ function StatsSection() {
             </table>
           </div>
           <p className="comparison-source">출처: Influencer Marketing Hub, HypeAuditor, Later 등 종합</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Early Benefits Section ─── */
+function EarlyBenefitsSection() {
+  const benefits = [
+    {
+      tag: 'EXCLUSIVE',
+      title: '3만+ 팔로워 인플루언서까지 활용',
+      desc: '초기 입점사에 한해 나노(1K~10K)뿐 아니라 팔로워 30,000명 이상의 마이크로·미드티어 인플루언서까지 매칭합니다. 일반 시장에서는 건당 수백만 원이 드는 협찬 채널을 무료로 활용하세요.',
+      highlight: '평균 협찬비 200~500만원 절감 효과',
+    },
+    {
+      tag: 'ZERO COST',
+      title: '입점비·광고비 0원',
+      desc: '초기 파트너에게는 입점 수수료, 월 광고비, 노출 비용 모두 면제됩니다. 상품 등록만으로 모든 마케팅 채널이 자동으로 열립니다.',
+      highlight: '런칭 후 6개월 100% 무료',
+    },
+    {
+      tag: 'DATA',
+      title: '마케팅 데이터 리포트 제공',
+      desc: '어떤 인플루언서가, 어떤 상품을, 어떤 게시물로 얼마나 팔았는지 모두 데이터로 받아보세요. 다음 시즌 기획에 바로 활용 가능한 인사이트입니다.',
+      highlight: '주간·월간 리포트 자동 발송',
+    },
+  ];
+
+  return (
+    <section className="section-early">
+      <div className="sp-container">
+        <div className="early-wrap">
+          <div className="section-header" style={{ textAlign: 'center', margin: '0 auto 56px' }}>
+            <div className="pill-badge" style={{ background: 'var(--accent)', color: 'var(--dark-surface)', marginBottom: '16px' }}>
+              Early Partner Benefits
+            </div>
+            <h2 className="section-title" style={{ color: 'var(--text-inverse)' }}>
+              지금 입점하면<br />이런 혜택이 추가됩니다
+            </h2>
+            <p className="early-subtitle">
+              TAG는 초기 안정적인 상품 풀 확보를 위해 입점사에게 특별한 혜택을 제공합니다.
+              한정된 기간, 한정된 수량의 입점사에게만 적용됩니다.
+            </p>
+          </div>
+
+          <div className="early-grid">
+            {benefits.map((b, i) => (
+              <div key={b.title} className="early-card">
+                <div className="early-card-tag en-font">
+                  <span className="early-num en-font">{String(i + 1).padStart(2, '0')}</span>
+                  {b.tag}
+                </div>
+                <h3>{b.title}</h3>
+                <p>{b.desc}</p>
+                <div className="early-highlight">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  {b.highlight}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -415,7 +463,7 @@ function PartnersFooter() {
         <div className="footer-business-info">
           <p>주식회사 태그 | 대표 류태규</p>
           <p>사업자등록번호 : 792-81-03987</p>
-          <p>주소 : 부천시 원미구 소사로 487, 2층 에이-05호</p>
+          <p>주소 : 부천시 원미구 소사로 487, 208호</p>
           <p>연락처 : 010-8546-0413 | 이메일 : <a href="mailto:tag_official@tags.kr" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>tag_official@tags.kr</a></p>
         </div>
         <p className="en-font footer-copyright">&copy; 2026 TAG. All rights reserved.</p>
@@ -599,6 +647,7 @@ export default function PartnersPage() {
       <ProblemSection />
       <HowItWorksSection />
       <StatsSection />
+      <EarlyBenefitsSection />
       <FinalCTA onOpenForm={() => setFormOpen(true)} />
       <PartnersFooter />
       <PartnerModal open={formOpen} onClose={() => setFormOpen(false)} />
