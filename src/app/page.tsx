@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 import './service.css';
 
 /* ─── Arrow Icon Component ─── */
@@ -216,7 +217,7 @@ function ServicesSection() {
               <div className="bar dark" style={{ height: '90%' }} />
               <div className="bar" style={{ height: '45%' }} />
             </div>
-            <h3>태그 한 번,<br />수익 파이프라인 완성</h3>
+            <h3>태그 한 번,<br />수익 발생</h3>
             <p>링크 하나만 복사해서 붙여넣으세요. 판매가 발생할 때마다 업계 최고 수준인 15-20%의 커미션이 자동으로 정산됩니다.</p>
             <div className="service-metric">예상 월 수익 23~45만원</div>
           </div>
@@ -295,6 +296,10 @@ function AboutSection() {
               <tr>
                 <td className="milestone-year">2025</td>
                 <td className="milestone-desc">예비창업패키지 선정</td>
+              </tr>
+              <tr>
+                <td className="milestone-year">2026</td>
+                <td className="milestone-desc">초기창업패키지 선정</td>
               </tr>
               <tr>
                 <td className="milestone-year">2026</td>
@@ -385,7 +390,7 @@ function NewsSection() {
 }
 
 /* ─── CTA Section ─── */
-function CTASection() {
+function CTASection({ onOpenInquiry }: { onOpenInquiry: () => void }) {
   return (
     <section className="section-cta sp-container">
       <div className="cta-grid">
@@ -401,7 +406,7 @@ function CTASection() {
             <h2>크리에이터로 시작하기</h2>
             <p>가입하고, 첫 OOTD에 태그를 달아보세요.<br />팔로워 수는 상관없습니다.</p>
           </div>
-          <a href="#" className="btn btn-accent">
+          <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" className="btn btn-accent">
             무료로 시작하기
             <div className="btn-icon">
               <ArrowIcon />
@@ -416,15 +421,173 @@ function CTASection() {
             <h2>TAG 팀과 함께 만들기</h2>
             <p>TAG를 만든 팀의 기술력과 실행력이 필요하신가요? 엔터프라이즈 레벨의 개발을 지원합니다.</p>
           </div>
-          <a href="#" className="btn btn-primary">
+          <button type="button" onClick={onOpenInquiry} className="btn btn-primary">
             외주 개발 문의하기
             <div className="btn-icon">
               <ArrowIcon />
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ─── Outsourcing Inquiry Modal ─── */
+function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [form, setForm] = useState({
+    name: '',
+    company: '',
+    contact: '',
+    email: '',
+    project_type: '',
+    budget: '',
+    description: '',
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setStatus('idle');
+
+    try {
+      const { error } = await supabase.from('outsourcing_inquiries').insert([
+        {
+          name: form.name,
+          company: form.company || null,
+          contact: form.contact,
+          email: form.email || null,
+          project_type: form.project_type || null,
+          budget: form.budget || null,
+          description: form.description,
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
+      if (error) throw error;
+
+      setStatus('success');
+      setForm({ name: '', company: '', contact: '', email: '', project_type: '', budget: '', description: '' });
+    } catch (err) {
+      console.error('Inquiry submit error:', err);
+      setStatus('error');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="inquiry-modal-overlay" onClick={onClose}>
+      <div className="inquiry-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="inquiry-modal-close" onClick={onClose} aria-label="닫기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        <h3 className="inquiry-modal-title">외주 개발 문의</h3>
+        <p className="inquiry-modal-desc">프로젝트 내용을 남겨주시면 영업일 기준 2일 이내에 회신드립니다.</p>
+
+        {status === 'success' ? (
+          <div className="inquiry-success">
+            <div className="inquiry-success-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                <path d="M22 4L12 14.01l-3-3" />
+              </svg>
+            </div>
+            <h4>문의가 접수되었습니다</h4>
+            <p>빠른 시일 내에 연락드리겠습니다.</p>
+            <button className="btn btn-primary" onClick={onClose}>닫기</button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="inquiry-form">
+            <div className="inquiry-row">
+              <label className="inquiry-field">
+                <span>이름 <em>*</em></span>
+                <input name="name" value={form.name} onChange={handleChange} required placeholder="홍길동" />
+              </label>
+              <label className="inquiry-field">
+                <span>회사명</span>
+                <input name="company" value={form.company} onChange={handleChange} placeholder="(선택)" />
+              </label>
+            </div>
+
+            <div className="inquiry-row">
+              <label className="inquiry-field">
+                <span>연락처 <em>*</em></span>
+                <input name="contact" value={form.contact} onChange={handleChange} required placeholder="010-0000-0000" />
+              </label>
+              <label className="inquiry-field">
+                <span>이메일</span>
+                <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="name@example.com" />
+              </label>
+            </div>
+
+            <div className="inquiry-row">
+              <label className="inquiry-field">
+                <span>프로젝트 유형</span>
+                <select name="project_type" value={form.project_type} onChange={handleChange}>
+                  <option value="">선택해주세요</option>
+                  <option value="웹사이트">웹사이트</option>
+                  <option value="웹 서비스">웹 서비스</option>
+                  <option value="모바일 앱">모바일 앱</option>
+                  <option value="쇼핑몰">쇼핑몰</option>
+                  <option value="AI 솔루션">AI 솔루션</option>
+                  <option value="기타">기타</option>
+                </select>
+              </label>
+              <label className="inquiry-field">
+                <span>예산</span>
+                <select name="budget" value={form.budget} onChange={handleChange}>
+                  <option value="">선택해주세요</option>
+                  <option value="500만원 이하">500만원 이하</option>
+                  <option value="500~1000만원">500~1000만원</option>
+                  <option value="1000~3000만원">1000~3000만원</option>
+                  <option value="3000~5000만원">3000~5000만원</option>
+                  <option value="5000만원 이상">5000만원 이상</option>
+                  <option value="협의 필요">협의 필요</option>
+                </select>
+              </label>
+            </div>
+
+            <label className="inquiry-field">
+              <span>프로젝트 설명 <em>*</em></span>
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                required
+                rows={5}
+                placeholder="개발하고 싶은 서비스나 기능에 대해 자유롭게 설명해주세요."
+              />
+            </label>
+
+            {status === 'error' && (
+              <p className="inquiry-error">문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</p>
+            )}
+
+            <button type="submit" className="btn btn-primary inquiry-submit" disabled={submitting}>
+              {submitting ? '전송 중...' : '문의 보내기'}
+              {!submitting && (
+                <div className="btn-icon">
+                  <ArrowIcon />
+                </div>
+              )}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -447,6 +610,8 @@ function ServiceFooter() {
 
 /* ─── Main Page ─── */
 export default function ServicePage() {
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+
   return (
     <div className="service-page">
       <ServiceNav />
@@ -455,8 +620,9 @@ export default function ServicePage() {
       <ServicesSection />
       <AboutSection />
       <NewsSection />
-      <CTASection />
+      <CTASection onOpenInquiry={() => setInquiryOpen(true)} />
       <ServiceFooter />
+      <InquiryModal open={inquiryOpen} onClose={() => setInquiryOpen(false)} />
     </div>
   );
 }
