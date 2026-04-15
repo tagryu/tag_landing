@@ -54,8 +54,9 @@ function ServiceNav() {
         </Link>
         <div className="nav-links">
           <a href="#">크리에이터</a>
-          <a href="#">이용 방법</a>
-          <a href="#" className="nav-login">로그인</a>
+          <Link href="/partners">공급사</Link>
+          <Link href="/">회사소개</Link>
+          <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" className="nav-login">앱 바로가기</a>
         </div>
         <button className="mobile-menu-btn" onClick={() => setMenuOpen(true)} aria-label="메뉴 열기">
           <HamburgerIcon />
@@ -72,8 +73,9 @@ function ServiceNav() {
           <CloseIcon />
         </button>
         <a href="#" onClick={() => setMenuOpen(false)}>크리에이터</a>
-        <a href="#" onClick={() => setMenuOpen(false)}>이용 방법</a>
-        <a href="#" onClick={() => setMenuOpen(false)}>로그인</a>
+        <Link href="/partners" onClick={() => setMenuOpen(false)}>공급사</Link>
+        <Link href="/about" onClick={() => setMenuOpen(false)}>회사소개</Link>
+        <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>앱 바로가기</a>
       </div>
     </>
   );
