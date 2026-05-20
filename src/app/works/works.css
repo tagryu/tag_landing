@@ -1,0 +1,210 @@
+/* ─── Works Page ─── */
+
+/* Hero */
+.works-page .works-hero {
+  text-align: center;
+  padding-top: 160px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.works-page .works-hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.works-page .works-hero p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+/* Project list */
+.works-page .works-list {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding-top: 80px;
+  padding-bottom: 120px;
+}
+
+.works-page .work-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.works-page .work-row.reverse > .work-visual,
+.works-page .work-row.reverse > .work-visual-link {
+  order: 2;
+}
+
+.works-page .work-visual-link {
+  display: block;
+  text-decoration: none;
+}
+
+.works-page .work-visual {
+  overflow: hidden;
+  padding: 0;
+  aspect-ratio: 16 / 10;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.works-page .work-visual:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(13, 27, 42, 0.12);
+}
+
+.works-page .work-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.works-page .work-index {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.works-page .work-category {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.works-page .work-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.works-page .work-desc {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.works-page .work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.works-page .work-tag {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.works-page .work-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--dark-surface);
+  color: var(--text-inverse);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.works-page .work-visit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(13, 27, 42, 0.2);
+}
+
+/* CTA */
+.works-page .works-cta-wrap {
+  padding-bottom: 140px;
+}
+
+.works-page .works-cta {
+  padding: 80px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: var(--dark-surface);
+}
+
+.works-page .works-cta h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.works-page .works-cta p {
+  font-size: 1.125rem;
+  color: var(--text-inverse-sec);
+  max-width: 520px;
+}
+
+.works-page .works-cta .btn {
+  margin-top: 12px;
+}
+
+/* ─── Tablet ─── */
+@media (max-width: 1024px) {
+  .works-page .works-hero h1 { font-size: 3rem; }
+  .works-page .work-row { gap: 40px; }
+  .works-page .work-name { font-size: 2rem; }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .works-page .works-hero {
+    padding-top: 130px;
+  }
+  .works-page .works-hero h1 { font-size: 2.25rem; }
+  .works-page .works-hero p { font-size: 1.05rem; }
+
+  .works-page .works-list {
+    gap: 72px;
+    padding-top: 48px;
+    padding-bottom: 80px;
+  }
+
+  .works-page .work-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .works-page .work-row.reverse .work-visual {
+    order: 0;
+  }
+
+  .works-page .work-name { font-size: 1.75rem; }
+  .works-page .work-desc { font-size: 1rem; }
+
+  .works-page .works-cta {
+    padding: 56px 24px;
+  }
+  .works-page .works-cta h2 { font-size: 1.75rem; }
+  .works-page .works-cta p { font-size: 1rem; }
+}

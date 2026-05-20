@@ -45,6 +45,7 @@ function PartnersNav() {
         <div className="nav-links">
           <Link href="/">크리에이터</Link>
           <Link href="/partners">공급사</Link>
+          <Link href="/works">개발 사례</Link>
           <Link href="/">회사소개</Link>
           <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" className="nav-login">앱 바로가기</a>
         </div>
@@ -63,6 +64,7 @@ function PartnersNav() {
         </button>
         <Link href="/" onClick={() => setMenuOpen(false)}>크리에이터</Link>
         <Link href="/partners" onClick={() => setMenuOpen(false)}>공급사</Link>
+        <Link href="/works" onClick={() => setMenuOpen(false)}>개발 사례</Link>
         <Link href="/" onClick={() => setMenuOpen(false)}>회사소개</Link>
         <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>앱 바로가기</a>
       </div>

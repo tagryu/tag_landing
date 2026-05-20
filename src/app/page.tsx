@@ -55,6 +55,7 @@ function ServiceNav() {
         <div className="nav-links">
           <a href="#">크리에이터</a>
           <Link href="/partners">공급사</Link>
+          <Link href="/works">개발 사례</Link>
           <Link href="/">회사소개</Link>
           <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" className="nav-login">앱 바로가기</a>
         </div>
@@ -74,6 +75,7 @@ function ServiceNav() {
         </button>
         <a href="#" onClick={() => setMenuOpen(false)}>크리에이터</a>
         <Link href="/partners" onClick={() => setMenuOpen(false)}>공급사</Link>
+        <Link href="/works" onClick={() => setMenuOpen(false)}>개발 사례</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>회사소개</Link>
         <a href="https://app.tags.kr" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>앱 바로가기</a>
       </div>
@@ -318,21 +320,24 @@ function AboutSection() {
           </div>
 
           <div className="track-record-grid">
-            {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="track-item active">Project {String(n).padStart(2, '0')}</div>
+            {['ENTTIX', 'Broadway\nShow', '미디어\n사이트', 'SnapClip', 'Global\nAgriFit'].map((name) => (
+              <div key={name} className="track-item active" style={{ whiteSpace: 'pre-line' }}>{name}</div>
             ))}
-            {[5, 6, 7, 8].map((n) => (
+            {[6, 7, 8].map((n) => (
               <div key={n} className="track-item">{String(n).padStart(2, '0')}</div>
             ))}
           </div>
 
           <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '0.875rem' }}>
-            패션, 커머스, AI 분야에서 8개의 프로덕트를 성공적으로 런칭한 경험을 바탕으로 TAG를 만듭니다.
+            티켓 예매, 미디어, 생성형 AI, 데이터 시각화 등 다양한 분야의 프로덕트를 직접 만들어 온 경험을 바탕으로 TAG를 만듭니다.
           </p>
 
-          <a href="#" className="btn btn-primary" style={{ padding: '12px 24px', fontSize: '1rem' }}>
-            자세히 보기 <span style={{ fontWeight: 400, color: 'var(--text-tertiary)' }}>(Coming soon)</span>
-          </a>
+          <Link href="/works" className="btn btn-primary" style={{ padding: '12px 24px', fontSize: '1rem' }}>
+            자세히 보기
+            <div className="btn-icon">
+              <ArrowIcon />
+            </div>
+          </Link>
         </div>
       </div>
     </section>
