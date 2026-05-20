@@ -3,12 +3,12 @@
 /* Hero */
 .works-page .works-hero {
   text-align: center;
-  padding-top: 160px;
-  padding-bottom: 40px;
+  padding-top: 120px;
+  padding-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .works-page .works-hero h1 {
@@ -28,8 +28,8 @@
 .works-page .works-list {
   display: flex;
   flex-direction: column;
-  gap: 120px;
-  padding-top: 80px;
+  gap: 100px;
+  padding-top: 32px;
   padding-bottom: 120px;
 }
 
@@ -179,14 +179,15 @@
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .works-page .works-hero {
-    padding-top: 130px;
+    padding-top: 104px;
+    padding-bottom: 16px;
   }
   .works-page .works-hero h1 { font-size: 2.25rem; }
   .works-page .works-hero p { font-size: 1.05rem; }
 
   .works-page .works-list {
-    gap: 72px;
-    padding-top: 48px;
+    gap: 64px;
+    padding-top: 24px;
     padding-bottom: 80px;
   }
 
